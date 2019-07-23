@@ -1,4 +1,4 @@
-# anulah2
+# OpenKurSI-Frontend
 
 ## Project setup
 ```
