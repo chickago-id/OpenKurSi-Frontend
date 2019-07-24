@@ -12,9 +12,14 @@ export default new Router({
       component: Home
     },
     {
-        path: '/afterlogin',
-        name: 'afterlogin',
-        component: () => import('./views/Afterlogin.vue')
+      path: '/afterlogin',
+      name: 'afterlogin',
+      component: () => import('./views/Afterlogin.vue')
     },
+    {
+      path: '/jadwal',
+      name: 'jadwal',
+      component: () => import('./views/Jadwal.vue')
+    }
   ]
 })

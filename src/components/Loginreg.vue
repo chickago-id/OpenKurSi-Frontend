@@ -1,6 +1,6 @@
 <template>
 <div>
-            <b-button variant="link" id="show-btn" @click="showModal" href="#">Login</b-button>
+            <b-button variant="link" id="show-btn" @click="showModal" href="#"><b><p>Login.</p></b></b-button>
             <b-modal ref="my-modal" hide-footer title="Login">
               <div class="d-block ">
                   <form ref="form" @submit.stop.prevent="handleSubmit">
@@ -57,3 +57,11 @@
     }
   }
 </script>
+
+<style>
+
+p {
+  color: black;
+}
+  
+</style>
