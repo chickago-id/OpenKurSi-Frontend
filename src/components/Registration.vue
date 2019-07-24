@@ -39,31 +39,31 @@
                          <div class="form-group">
                             <label class="col-md-4 control-label">Alamat</label>
                             <div class="col-md-8 inputGroupContainer">
-                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="postcode" name="postcode" placeholder="Postal Code/ZIP" class="form-control" required="true" value="" type="text"></div>
+                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="alamat" name="alamat" placeholder="Masukkan Alamat" class="form-control" required="true" value="" type="text"></div>
                             </div>
                          </div>
                          <div class="form-group">
                             <label class="col-md-4 control-label">Kecamatan</label>
                             <div class="col-md-8 inputGroupContainer">
-                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span><input id="email" name="email" placeholder="Email" class="form-control" required="true" value="" type="text"></div>
+                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span><input id="kecamatan" name="kecamatan" placeholder="Masukkan Kecamatan" class="form-control" required="true" value="" type="text"></div>
                             </div>
                          </div>
                          <div class="form-group">
                             <label class="col-md-4 control-label">Kabupaten</label>
                             <div class="col-md-8 inputGroupContainer">
-                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span><input id="phoneNumber" name="phoneNumber" placeholder="Phone Number" class="form-control" required="true" value="" type="text"></div>
+                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span><input id="kabupaten" name="kabupaten" placeholder="Masukkan Kabupaten" class="form-control" required="true" value="" type="text"></div>
                             </div>
                          </div>
                          <div class="form-group">
                             <label class="col-md-4 control-label">Provinsi</label>
                             <div class="col-md-8 inputGroupContainer">
-                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span><input id="phoneNumber" name="phoneNumber" placeholder="Phone Number" class="form-control" required="true" value="" type="text"></div>
+                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span><input id="provinsi" name="provinsi" placeholder="Masukkan Provinsi" class="form-control" required="true" value="" type="text"></div>
                             </div>
                          </div>
                          <div class="form-group">
                             <label class="col-md-4 control-label">Kode Pos</label>
                             <div class="col-md-8 inputGroupContainer">
-                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span><input id="phoneNumber" name="phoneNumber" placeholder="Phone Number" class="form-control" required="true" value="" type="text"></div>
+                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span><input id="kodepos" name="kodepos" placeholder="Masukkan Kode Pos" class="form-control" required="true" value="" type="text"></div>
                             </div>
                          </div>
                       </fieldset>
@@ -75,14 +75,14 @@
                          <div class="form-group">
                             <label class="col-md-4 control-label">Tempat Lahir</label>
                             <div class="col-md-8 inputGroupContainer">
-                               <div class="input-group date"><span class="input-group-addon"></span><input id="fullName" name="fullName" placeholder="Full Name" class="form-control" required="true" value="" type="text"></div>
+                               <div class="input-group date"><span class="input-group-addon"></span><input id="tempatlahir" name="tempatlahir" placeholder="Masukkan Tempat Lahir" class="form-control" required="true" value="" type="text"></div>
                             </div>
                          </div>
 
                          <div class="form-group">
                             <label class="col-md-4 control-label">Tanggal Lahir</label>
                             <div class="col-md-8 inputGroupContainer">
-                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="addressLine1" name="addressLine1" placeholder="Address Line 1" class="form-control datepicker" required="true" value="" type="date"></div>
+                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="tanggallahir" name="tanggallahir" placeholder="Tanggal Lahir" class="form-control datepicker" required="true" value="" type="date"></div>
                             </div>
                          </div>
                          <div class="form-group">
@@ -96,43 +96,43 @@
                          <div class="form-group">
                             <label class="col-md-4 control-label">Agama</label>
                             <div class="col-md-8 inputGroupContainer">
-                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="city" name="city" placeholder="City" class="form-control" required="true" value="" type="text"></div>
+                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="agama" name="agama" placeholder="Masukkan Agama" class="form-control" required="true" value="" type="text"></div>
                             </div>
                          </div>
                          <div class="form-group">
                             <label class="col-md-4 control-label">Status</label>
                             <div class="col-md-8 inputGroupContainer">
-                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="state" name="state" placeholder="State/Province/Region" class="form-control" required="true" value="" type="text"></div>
+                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="status" name="status" placeholder="Status" class="form-control" required="true" value="" type="text"></div>
                             </div>
                          </div>
                          <div class="form-group">
                             <label class="col-md-4 control-label">Asal Sekolah </label>
                             <div class="col-md-8 inputGroupContainer">
-                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="postcode" name="postcode" placeholder="Postal Code/ZIP" class="form-control" required="true" value="" type="text"></div>
+                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="asalsekolah" name="asalsekolah" placeholder="Masukkan Asal Sekolah" class="form-control" required="true" value="" type="text"></div>
                             </div>
                          </div>
                          <div class="form-group">
                             <label class="col-md-4 control-label">Pekerjaan </label>
                             <div class="col-md-8 inputGroupContainer">
-                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="postcode" name="postcode" placeholder="Postal Code/ZIP" class="form-control" required="true" value="" type="text"></div>
+                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="pekerjaan" name="pekerjaan" placeholder="Masukkan Pekerjaan" class="form-control" required="true" value="" type="text"></div>
                             </div>
                          </div>
                           <div class="form-group">
                             <label class="col-md-4 control-label">Nama Orang Tua</label>
                             <div class="col-md-8 inputGroupContainer">
-                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span><input id="email" name="email" placeholder="Email" class="form-control" required="true" value="" type="text"></div>
+                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span><input id="namaortu" name="namaortu" placeholder="Masukkan Nama Orang Tua" class="form-control" required="true" value="" type="text"></div>
                             </div>
                          </div>
                          <div class="form-group">
                             <label class="col-md-4 control-label">No Telp Orang Tua</label>
                             <div class="col-md-8 inputGroupContainer">
-                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span><input id="phoneNumber" name="phoneNumber" placeholder="Phone Number" class="form-control" required="true" value="" type="text"></div>
+                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span><input id="nomorortu" name="nomorortu" placeholder="Masukkan Nomor Telp" class="form-control" required="true" value="" type="text"></div>
                             </div>
                          </div>
                          <div class="form-group">
                             <label class="col-md-4 control-label">Instagram </label>
                             <div class="col-md-8 inputGroupContainer">
-                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span><input id="email" name="email" placeholder="Email" class="form-control" required="true" value="" type="text"></div>
+                               <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span><input id="ig" name="ig" placeholder="Masukkan username Instagram" class="form-control" required="true" value="" type="text"></div>
                             </div>
                          </div>
                          <div>
