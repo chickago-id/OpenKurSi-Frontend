@@ -135,11 +135,14 @@
                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span><input id="ig" name="ig" placeholder="Masukkan username Instagram" class="form-control" required="true" value="" type="text"></div>
                             </div>
                          </div>
-                         <div>
-                            <div>
-                              sudah memiliki akun?
-                               <button type="button" class="btn btn-link">Login</button>
-                               <button type="button" class="btn btn-primary">Daftar</button>
+
+                         <div>                            
+                            <div>                                
+                               <th>
+                                 <td>sudah punya akun?</td>
+                                 <td><Loginreg/></td>
+                                 <td><button type="button" class="btn btn-primary float-left">Daftar</button></td>
+                               </th>                         
                             </div>
                          </div>
                       </fieldset>
@@ -150,3 +153,22 @@
        </table>
     </div>
 </template>
+
+<script>
+  import Loginreg from './Loginreg'
+
+  export default {
+    name: 'App',
+    components: {
+      Loginreg
+    }
+  }
+
+</script>
+
+<style>
+.bawa {
+  text-align: center;
+}
+  
+</style>

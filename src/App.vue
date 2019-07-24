@@ -14,10 +14,14 @@
 //import HelloWorld from './components/HelloWorld.vue'
 import navbar from './components/Navbar.vue';
 // import regis from './components/Status.vue';
+import loginnav from './components/Loginnav.vue'
+import loginreg from './components/Loginreg.vue'
 
 export default {
   components: {
-   navbar
+   navbar,
+   loginnav,
+   loginreg
   // HelloWorld
   }
 }
