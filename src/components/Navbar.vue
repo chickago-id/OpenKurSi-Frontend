@@ -8,7 +8,8 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-navbar-nav>
-          <b-nav-item href="#">Home</b-nav-item>
+          <!-- <b-nav-item href="#">Home</b-nav-item> -->
+          <router-link to='/'><b-nav-item href="#">Home</b-nav-item></router-link>
           <b-nav-item href="#"></b-nav-item>
       </b-navbar-nav>
         <b-nav-form>

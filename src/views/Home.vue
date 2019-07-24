@@ -1,22 +1,14 @@
 <template>
-  <div>
-    <navbar></navbar>
-    <br>
-    <!-- <regis></regis> -->
-    <router-view/>
-  </div>
-  
-  
+    <regis></regis>
 </template>
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
-import navbar from './components/Navbar.vue';
-// import regis from './components/Status.vue';
+import regis from '@/components/Registration.vue';
 
 export default {
   components: {
-   navbar
+   regis
   // HelloWorld
   }
 }
