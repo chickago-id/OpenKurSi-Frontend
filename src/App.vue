@@ -1,9 +1,10 @@
 <template>
   <div>
-    <navbar></navbar>
+    <navbar></navbar> 
     <br>
     <!-- <regis></regis> -->
     <router-view/>
+
   </div>
   
   
