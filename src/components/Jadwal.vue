@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container>
+    <b-container class="conta">
       <b-card>
         <table class="table">
           <thead>
@@ -15,8 +15,8 @@
             <tr>
               <td>1</td>
               <td>
-                <div>
-                  <b-form-select v-model="selected" class="mb-1" size="sm" width="10px">
+                <div class="float-center">
+                  <b-form-select v-model="selected" class="mb-1" style="max-width: 13rem">
                     <option :value="null">Please select an option</option>
                     <optgroup label="1 bulan">
                       <option>Desain Grafis</option>
@@ -32,7 +32,12 @@
               </td>
               <td>
                 <div>
-                  <b-form-select v-model="selected1" class="mb-1" size="sm" width="10px">
+                  <b-form-select
+                    v-model="selected1"
+                    class="mb-1"
+                    size="sm"
+                    style="max-width: 13rem"
+                  >
                     <option :value="null">Please select an option</option>
                     <option>03 agustus 2019</option>
                     <option>15 agustus 2019</option>
@@ -41,7 +46,12 @@
               </td>
               <td>
                 <div>
-                  <b-form-select v-model="selected2" class="mb-1" size="sm" width="10px">
+                  <b-form-select
+                    v-model="selected2"
+                    class="mb-1"
+                    size="sm"
+                    style="max-width: 13rem"
+                  >
                     <option :value="null">Please select an option</option>
                     <option>09.00 am</option>
                     <option>01.30 pm</option>
@@ -57,6 +67,9 @@
             </tr>
           </tbody>
         </table>
+        <div class="text-right">
+          <b-button variant="primary">Simpan</b-button>
+        </div>
       </b-card>
     </b-container>
   </div>
@@ -73,3 +86,10 @@ export default {
   }
 };
 </script>
+
+<style>
+.conta {
+  max-width: 60rem;
+  float: center;
+}
+</style>
