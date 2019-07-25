@@ -1,25 +1,20 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Vue from "vue";
+import Router from "vue-router";
+import Home from "./views/Home.vue";
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'home',
+      path: "/",
+      name: "home",
       component: Home
     },
     {
-      path: '/afterlogin',
-      name: 'afterlogin',
-      component: () => import('./views/Afterlogin.vue')
-    },
-    {
-      path: '/jadwal',
-      name: 'jadwal',
-      component: () => import('./views/Jadwal.vue')
+      path: "/afterlogin",
+      name: "afterlogin",
+      component: () => import("./views/Afterlogin.vue")
     },
     {
       path: '/admin/kelas',
@@ -30,6 +25,26 @@ export default new Router({
       path: '/admin/kelas/tambah',
       name: 'tambah_kelas',
       component: () => import('./views/Vnewkelas.vue')
+    },
+      path: "/jadwal",
+      name: "jadwal",
+      component: () => import("./views/Penjadwal.vue")
+    },
+    {
+      path: "/materi",
+      name: "materi",
+      component: () => import("./views/Penmateri.vue")
+    },
+    {
+      path: "/nilai",
+      name: "nilai",
+      component: () => import("./views/Pennilai.vue")
+    },
+    {
+      path: "/absensi",
+      name: "absensi",
+      component: () => import("./views/Absensi.vue") 
+>>>>>>> e7be63e291bd1a3f3d00eea217c38d5f33083616
     }
   ]
-})
+});
