@@ -20,6 +20,16 @@ export default new Router({
       path: '/jadwal',
       name: 'jadwal',
       component: () => import('./views/Jadwal.vue')
+    },
+    {
+      path: '/admin/kelas',
+      name: 'kelas',
+      component: () => import('./views/Vkelas.vue')
+    },
+    {
+      path: '/admin/kelas/tambah',
+      name: 'tambah_kelas',
+      component: () => import('./views/Vnewkelas.vue')
     }
   ]
 })
