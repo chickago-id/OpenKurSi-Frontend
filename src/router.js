@@ -26,6 +26,7 @@ export default new Router({
       name: 'tambah_kelas',
       component: () => import('./views/Vnewkelas.vue')
     },
+    {
       path: "/jadwal",
       name: "jadwal",
       component: () => import("./views/Penjadwal.vue")
@@ -44,7 +45,6 @@ export default new Router({
       path: "/absensi",
       name: "absensi",
       component: () => import("./views/Absensi.vue") 
->>>>>>> e7be63e291bd1a3f3d00eea217c38d5f33083616
     }
   ]
 });
