@@ -30,6 +30,11 @@ export default new Router({
       path: "/nilai",
       name: "nilai",
       component: () => import("./views/Pennilai.vue")
+    },
+    {
+      path: "/absensi",
+      name: "absensi",
+      component: () => import("./views/Absensi.vue") 
     }
   ]
 });
