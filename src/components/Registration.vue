@@ -1,6 +1,7 @@
 <template>
-  <div class="container">
-       <table class="table table-striped">
+  <b-container>
+      <b-card>
+      <table class="table table-striped">
           <tbody>
              <tr>
                 <td colspan="1">
@@ -151,7 +152,9 @@
              </tr>
           </tbody>
        </table>
-    </div>
+  </b-card>
+  </b-container>
+  
 </template>
 
 <script>
