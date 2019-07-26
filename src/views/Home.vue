@@ -1,14 +1,14 @@
 <template>
-    <regis></regis>
+    <signup></signup>
 </template>
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
-import regis from '@/components/Registration.vue';
+import signup from '@/views/SignUp.vue';
 
 export default {
   components: {
-   regis
+   signup
   // HelloWorld
   }
 }

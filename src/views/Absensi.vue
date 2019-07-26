@@ -8,13 +8,13 @@
                 <h1>Absensi Siswa</h1>
             </div>
             <tr>
-              <td>Nama Kelas : {{anu}}</td>
+              <td>Nama Kelas : </td>
             </tr>
             <tr>
-              <td>Id Kelas   : {{anu2}}</td>
+              <td>Id Kelas   : </td>
             </tr>
-          <div id="anu">
-            <b-table striped hover :items="siswa">
+          <div> 
+                  <b-table striped hover :items="siswa">             
             </b-table>  
           </div>
            <div class="text-right">
@@ -23,16 +23,17 @@
       </b-tab>
       <b-tab title="Absensi Instruktur">
             <div >
-                <h1>Absensi Instruktur</h1>
+
+                <h1 ></h1>
             </div>
             <tr>
-              <td>Nama Kelas : {{anu}}</td>
+              <td>Nama Kelas : </td>
             </tr>
             <tr>
-              <td>Id Kelas : {{anu2}}</td>
+              <td>Id Kelas : </td>
             </tr>
-          <div id="anu">
-            <b-table striped hover :items="instruktur">
+          <div>
+            <b-table striped hover :items="siswa" :fields="fields">             
             </b-table>  
           </div>
            <div class="text-right">
@@ -50,35 +51,31 @@
 
 </template>
 
+  
 <script>
+ import axios from 'axios';
   export default {
     data() {
       return {
-        siswa: [
-          { No: 1, Nama : 'Surat',Jam_Masuk : '15.00',Tanggal :'null', Status : 'Hadir' },
-          { No: 2, Nama : 'Paimen',Jam_Masuk : '15.00',Tanggal :'null',  Status : 'Hadir' },
-          { No: 3, Nama : 'Sri',Jam_Masuk : '15.00',Tanggal :'null',  Status : 'Hadir' },
-          { No: 4, Nama : 'Painem',Jam_Masuk : '15.00',Tanggal :'null',  Status : 'Hadir' }
-        ], 
-        instruktur: [
-          { No: 1, Nama : 'Paijo',Materi : 'Office',Jam_Masuk : '15.00',Jam_Keluar :'null', Status : 'Hadir' },
-          { No: 2, Nama : 'Slamet',Materi : 'Web',Jam_Masuk : '16.00',Jam_Keluar :'null',  Status : 'Hadir' },
-          { No: 3, Nama : 'Tri',Materi : 'Desain',Jam_Masuk : '15.00',Jam_Keluar :'null',  Status : 'Hadir' },
-          { No: 4, Nama : 'Dwi',Materi : 'Office',Jam_Masuk : '15.00',Jam_Keluar :'null',  Status : 'Hadir' }
-        ], 
-
-
-        anu: 'Office',
-
-        anu2: 'Off01'
-      }
+      siswa: [],
+      fields:['nama']
+    }
+    },
+    mounted(){
+      this.getSiswa()
     },
   methods: {
-      print() {
-         window.print();
-      }
+    print(){
+        window.print();
+    },
+      getSiswa(){
+      axios.get("https://api.myjson.com/bins/18w9ip")
+      .then((response)  =>  {
+        this.siswa = response.data.siswa;
+        console.log(response)
+      })
     }
 
   }
-
+}
 </script>
