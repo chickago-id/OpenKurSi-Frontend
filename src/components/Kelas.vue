@@ -16,20 +16,49 @@
                         <b-button size="sm" variant="danger">Hapus</b-button>
                     </template>
                 </b-table>
+                <!-- <table class="table table-responsive table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Kode</th>
+                            <th>Kelas</th>
+                            <th>Jam Pilihan</th>
+                            <th>Tanggal Mulai</th>
+                            <th>Target Peserta</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody v-for="">
+                        <tr>
+                            
+                        </tr>   
+                </table> -->
             </b-card>
         </b-container>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     data() {
       return {
-        fields: ['Kode', 'Kelas', 'Jam Pilihan', 'Tanggal Mulai', 'Target Peserta', 'Action'],
-        items: [
-          { Kode: 'OFF', Kelas: 'Office', 'Jam Pilihan': '18.00', 'Tanggal Mulai': '11-Agustus-2019', 'Target Peserta': '5' },
-        ]
+        fields: ['kode', 'kelas', 'jam_pilihan', 'tanggal_mulai', 'target_peserta', 'Action'],
+        items: []
       }
+    },
+    mounted(){
+        axios.get('https://api.myjson.com/bins/1hf6wh')
+        .then((response)=> {
+            this.items = response.data.kelas;
+            console.log(response)
+        })
+        
     }
+    // data(){
+    //     return{
+    //         item: null
+    //     }
+    // }
 }
 </script>
 

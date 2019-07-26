@@ -45,6 +45,11 @@ export default new Router({
       path: "/absensi",
       name: "absensi",
       component: () => import("./views/Absensi.vue") 
+    },
+    {
+      path: "/fill",
+      name: 'lengkapi',
+      component: () => import('./views/Vlengkapi.vue')
     }
   ]
 });
