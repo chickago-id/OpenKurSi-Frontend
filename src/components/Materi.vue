@@ -1,11 +1,11 @@
 <template>
   <div>
-    <b-container class="qwe">
+    <b-container class="tengah">
       <b-card>
         <div class="materitengah">
           <h2>Materi</h2>
           <div class="text-right">
-            <b-button variant="primary">Update</b-button>
+            <loginnav />
           </div>
           <br />
         </div>
@@ -31,8 +31,19 @@
 </template>
 
 
+<script>
+import loginnav from "./Popmateri.vue";
+export default {
+  components: {
+    loginnav
+  }
+};
+</script>
+
+
+
 <style>
-.qwe {
+.tengah {
   max-width: 30rem;
   float: center;
 }
