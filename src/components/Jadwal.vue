@@ -16,7 +16,7 @@
               <td>1</td>
               <td>
                 <div class="float-center">
-                  <b-form-select v-model="selected" class="mb-1" style="max-width: 13rem">
+                  <b-form-select v-model="selected" class="mb-1" size="sm" style="max-width: 13rem">
                     <option :value="null">Please select an option</option>
                     <optgroup label="1 bulan">
                       <option>Desain Grafis</option>
