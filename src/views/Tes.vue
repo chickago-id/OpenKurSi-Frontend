@@ -69,7 +69,7 @@ h1 {
   color: rgb(0, 0, 0);
 }
 .hsatu {
-  background: #007bff;
+  /* background: #007bff; */
   border-radius: 3rem;
 }
 .tengah {
