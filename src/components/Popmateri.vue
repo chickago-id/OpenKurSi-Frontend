@@ -18,10 +18,13 @@
         style="text-center"
       >
         <label>Nama Materi</label>
-        <b-form-input class="col-5"></b-form-input>
+        <b-form-input class="col-8"></b-form-input>
         <label for="input-with-list">Kode Materi</label>
-        <b-form-input class="col-7"></b-form-input>
-        <b-button variant="primary" class="mt-3 btn-sm" block @click="hideModal">Tambah Materi</b-button>
+        <b-form-input class="col-5"></b-form-input>
+
+        <div style="text-align:center;">
+          <b-button variant="primary" class="mt-3 btn-sm asd" block @click="hideModal">Tambah Materi</b-button>
+        </div>
       </b-modal>
     </div>
   </container>
@@ -45,9 +48,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .block {
-  max-width: 40rem;
+  max-width: 20rem;
   float: center;
 }
 p {
@@ -59,8 +62,12 @@ label {
 title {
   text-align: center;
 }
-
+.asd {
+  max-width: 7rem;
+  margin-left: 30%;
+}
 form {
-  display: inline-block;
+  width: 90%;
+  background-color: #c0d7f8;
 }
 </style>
