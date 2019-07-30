@@ -36,7 +36,8 @@
             </label>
         </div>
         <div class="text-center">
-          <button type="submit">Login</button>
+          <b-spinner v-if="status=='loading'" variant="primary" ref="Spinner"></b-spinner>
+          <button type="submit" >Login</button>
         </div>
         </form>
         <br />
@@ -50,10 +51,16 @@
 
 <script>
 export default {
+
   data(){
     return{
       username:'',
       password:''
+    }
+  },
+  computed:{
+    status(){
+      return this.$store.getters.authStatus;
     }
   },
   methods: {
@@ -67,11 +74,20 @@ export default {
         })
       .catch(err => console.log(err))
     },
+
+
     showModal() {
       this.$refs["my-modal"].show();
     },
     hideModal() {
       this.$refs["my-modal"].hide();
+
+    },
+    test(){
+      this.$refs.Spinner.show();
+      setTimeout(function () {
+        this.$refs.Spinner.hide();
+      }.bind(this), 5000);
     },
     toggleModal() {
       // We pass the ID of the button that we want to return focus to
