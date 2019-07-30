@@ -36,7 +36,7 @@
             </label>
         </div>
         <div class="text-center">
-          <button type="submit" @click='hideModal'>Login</button>
+          <button type="submit">Login</button>
         </div>
         </form>
         <br />
@@ -61,7 +61,10 @@ export default {
       let email = this.username
       let password = this.password
       this.$store.dispatch('login', {email, password})
-      .then(() => this.$router.push('/afterlogin'))
+      .then(() => {
+        this.$router.push('/afterlogin')
+        this.hideModal()
+        })
       .catch(err => console.log(err))
     },
     showModal() {

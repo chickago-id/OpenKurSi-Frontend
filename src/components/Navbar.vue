@@ -22,7 +22,7 @@
             <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>-->
           </b-nav-form>
           <b-navbar-nav>
-            <b-nav-item v-if="isLoggedIn">
+            <b-nav-item v-if="isLoggedIn" @click="logout">
               Logout
             </b-nav-item>
             <b-nav-item v-else>
@@ -46,6 +46,12 @@ export default {
   computed:{
     isLoggedIn(){
       return this.$store.getters.isLoggedIn
+    }
+  },
+  methods:{
+    logout(){
+      this.$store.dispatch('logout')
+      .then(() => this.$router.push('/'))
     }
   }
 };
