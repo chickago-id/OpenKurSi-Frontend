@@ -29,7 +29,7 @@ export default new Router({
     {
       path: "/jadwal",
       name: "jadwal",
-      component: () => import("./views/Penjadwal.vue")
+      component: () => import("./views/Jadwal.vue")
     },
     {
       path: "/materi",
