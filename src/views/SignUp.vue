@@ -31,9 +31,9 @@
         <b-button block variant="info">Sign Up</b-button>
         <tr>
           <!-- <td> -->
-          <td text-allign="center">sudah punya akun?</td>
+          <td text-allign="center">sudah punya akun?&nbsp; </td>
           <td>
-            <loginreg />
+            <loginnav />
           </td>
           <!-- </td> -->
         </tr>
@@ -44,11 +44,11 @@
 </template>
 
 <script>
-import loginreg from "@/components/Loginreg";
+import loginnav from "@/components/Poplog";
 
 export default {
   components: {
-    loginreg
+    loginnav
   },
   data() {
     return {

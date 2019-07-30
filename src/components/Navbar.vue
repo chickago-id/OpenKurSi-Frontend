@@ -5,7 +5,7 @@
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
+        <b-navbar-nav v-if="isLoggedIn">
           <!-- <b-nav-item to="/">Home</b-nav-item> -->
           <b-nav-item to="/jadwal">Jadwal</b-nav-item>
           <b-nav-item to="/admin/kelas">Kelas</b-nav-item>
@@ -22,7 +22,12 @@
             <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>-->
           </b-nav-form>
           <b-navbar-nav>
-            <Loginnav />
+            <b-nav-item v-if="isLoggedIn">
+              Logout
+            </b-nav-item>
+            <b-nav-item v-else>
+              <Loginnav />
+            </b-nav-item>
           </b-navbar-nav>
         </b-navbar-nav>
       </b-collapse>
@@ -37,6 +42,11 @@ export default {
   name: "App",
   components: {
     Loginnav
+  },
+  computed:{
+    isLoggedIn(){
+      return this.$store.getters.isLoggedIn
+    }
   }
 };
 </script>
