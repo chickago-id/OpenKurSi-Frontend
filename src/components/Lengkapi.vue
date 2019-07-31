@@ -2,7 +2,7 @@
     <b-container>
         <b-card>
             <h5 slot="header">Lengkapi Data Diri</h5>
-            <b-form>
+            <b-form @submit.prevent="save">
                 <table class="col-md-12">
                     <tr v-if="error.length">
                         <td colspan="3" align="center" v-for="ev in error" :key="ev">{{ ev }}</td>
@@ -111,6 +111,7 @@ export default {
             kode_pos: '',
             instagram: '',
             error:[],
+            biodata:[]
         }
     },
     methods:{
@@ -121,7 +122,31 @@ export default {
                 console.log(error);
             }
             e.preventDefault()
-        }
+        },
+        async save(event){
+          try{
+            const res = await axios.post('http://localhost:3000/biodata', this.akun)
+                this.biodata = res.data
+                this.tempat_lahir= ''
+                this.tanggal_lahir= ''
+                this.gender= 'laki-laki'
+                this.agama= ''
+                this.status= ''
+                this.pekerjaan= ''
+                this.orang_tua= ''
+                this.no_telp_ortu= ''
+                this.asal_sekolah= ''
+                this.alamat= ''
+                this.kecamatan= ''
+                this.kabupaten= ''
+                this.provinsi= ''
+                this.kode_pos= ''
+                this.instagram= ''
+                event.target.reset()
+          }catch(e){
+            console.log(e)
+          }
+     },
     }
 }
 </script>
