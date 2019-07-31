@@ -60,6 +60,11 @@ export default new Router({
       path: "/profile",
       name: 'profile',
       component: () => import('./views/Vprofile.vue')
+    },
+    {
+      path: "/addjadwal",
+      name: 'addjadwal',
+      component: () => import('./views/Vaddjadwal.vue')
     }
   ]
 });
