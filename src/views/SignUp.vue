@@ -5,12 +5,18 @@
       <b-card class="tengah" header="Sign Up">
         <div role="group">
           <label for="input-live">Nama Lengkap</label>
-          <b-form-input id="namalengkap" v-model="nama" placeholder="Masukkan Nama Anda"></b-form-input>
+          <b-form-input id="nama" v-model="nama" placeholder="Masukkan Nama Anda"></b-form-input>
           <label for="input-live">Username</label>
           <b-form-input
             id="username"
             v-model="username"
             placeholder="Masukkan Username Yang diinginkan"
+          ></b-form-input>
+          <label for="input-live">Email</label>
+          <b-form-input
+            id="email"
+            v-model="email"
+            placeholder="Masukkan Email Anda"
           ></b-form-input>
           <label for="input-live">Password</label>
           <b-form-input
@@ -52,8 +58,9 @@ export default {
   },
   data() {
     return {
-      name: "",
+      nama: "",
       username: "",
+      email:"",
       password: ""
     };
   }
