@@ -74,7 +74,4 @@ export default {
   margin-bottom: 10px;
   max-width: 25rem;
 }
-.body {
-  color: red;
-}
 </style>
