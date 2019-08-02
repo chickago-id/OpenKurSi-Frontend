@@ -6,7 +6,7 @@
         <div role="group" >
           <form @submit.prevent="save"> 
           <label for="input-live">Nama Lengkap</label>
-          <b-form-input id="nama" v-model="akun.nama" placeholder="Masukkan Nama Anda"></b-form-input>
+          <b-form-input id="nama" v-model="akun.nama_lengkap" placeholder="Masukkan Nama Anda"></b-form-input>
           <label for="input-live">Username</label>
           <b-form-input
             id="username"
@@ -66,7 +66,7 @@ export default {
     return {
       password2:"",
       akun :{
-        nama: "",
+        nama_lengkap: "",
         username: "",
         email:"",
         password: ""
@@ -77,9 +77,9 @@ export default {
   methods: { 
     async save(event){
       try{
-        const res = await axios.post('http://167.71.203.32:8081/buat-akun', this.akun)
+        const res = await axios.post('http://localhost:8081/buat-akun', this.akun)
         this.user = res.data
-        this.nama =''
+        this.nama_lengkap =''
         this.username = ''
         this.email = ''
         this.password = ''
