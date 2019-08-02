@@ -9,6 +9,7 @@
               <th>kelas</th>
               <th>tanggal</th>
               <th>jam</th>
+              <th>kuota</th>
             </tr>
           </thead>
           <tbody>

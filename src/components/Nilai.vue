@@ -14,7 +14,7 @@
           <thead>
             <tr>
               <th>Nama Siswa</th>
-              <th>Kai</th>
+              <th>Nilai</th>
             </tr>
           </thead>
           <tbody>
@@ -25,14 +25,25 @@
           </tbody>
         </table>
         <div class="text-right">
-          <b-button variant="primary">Simpan</b-button>
+          <b-button @click="print" variant="primary">Simpan</b-button>
         </div>
       </b-card>
     </b-container>
   </div>
 </template>
 
+<script >
+    export default{
+      methods: {
+        print(){
+            window.print()
+        }
+      }
+        
+    }
 
+
+</script>
 <style>
 .qwe {
   max-width: 50rem;

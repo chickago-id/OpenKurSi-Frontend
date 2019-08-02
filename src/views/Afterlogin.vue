@@ -3,20 +3,20 @@
     <status />
     <br />
     <!-- <addkelas/> -->
-    <jadwal />
+    <daftarkelas />
   </div>
 </template>
 
 <script>
 import status from "@/components/Status.vue";
 // import addkelas from "@/components/Addkelas.vue";
-import jadwal from "@/components/Jadwal.vue";
+import daftarkelas from "@/components/Daftarkelas.vue";
 
 export default {
   components: {
     status,
     // addkelas
-    jadwal
+    daftarkelas
   }
 };
 </script>
