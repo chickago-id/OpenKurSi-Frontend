@@ -78,7 +78,7 @@ export default {
     async save(event){
       try{
 
-        const res = await axios.post('http://localhost:8081/buat-akun', this.akun)
+        const res = await axios.post(process.env.VUE_APP_ROOT_API+'/buat-akun', this.akun)
         this.user = res.data
         this.nama_lengkap =''
         this.username = ''

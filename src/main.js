@@ -14,10 +14,12 @@ if (token) {
   Vue.prototype.$http.defaults.headers.common['Authorization'] = token
 }
 
+
 Vue.use(BootstrapVue)
 
 Vue.config.productionTip = false
 
+Axios.defaults.baseURL = process.env.VUE_APP_ROOT_API;
 new Vue({
   router,
   store,
