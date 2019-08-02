@@ -19,9 +19,9 @@
           </thead>
           <tbody>
             <tr>
-              <td>1</td>
-              <td>12sum13</td>
-              <td>sumof</td>
+              <td >1</td>
+              <td >12sum13</td>
+              <td >sumof</td>
             </tr>
           </tbody>
         </table>
@@ -33,10 +33,39 @@
 
 <script>
 import loginnav from "./Popmateri.vue";
+import axios from "axios";
 export default {
   components: {
     loginnav
+  },
+  data(){
+    return{
+      data_materi:{
+        no:'',
+        kode_materi:'',
+        materi:''
+      },
+      materi:[]
+    }
+  },
+  mounted(){
+    this.getMateri()
+  },
+  methods:{
+    getMateri(){
+      axios.get("")
+      .then((response) => {
+        this.materi = response.data.materi;
+        console.log(response)
+      })
+    },
+   
+    editMateri(){
+
+    }
+
   }
+
 };
 </script>
 
