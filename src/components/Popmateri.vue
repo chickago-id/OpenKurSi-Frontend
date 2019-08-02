@@ -18,11 +18,11 @@
         hide-footer
         style="text-center"
       >
-          <form @submit.prevent="setMateri" >
+      <form @submit.prevent="setMateri" >
         <label>Nama Materi</label>
-        <b-form-input v-model="nama_materi"class="col-8"></b-form-input>
+        <b-form-input v-model="data_materi.nama_materi" class="col-8"></b-form-input>
         <label for="input-with-list">Kode Materi</label>
-        <b-form-input v-model="kode_materi"class="col-5"></b-form-input>
+        <b-form-input v-model="data_materi.kode_materi" class="col-5"></b-form-input>
         <div style="text-align:center;">
           <b-button variant="primary" class="mt-3 btn-sm asd" type="submit" block>Tambah Materi</b-button>
         </div>
@@ -60,10 +60,10 @@ export default {
       this.$refs["my-modal"].toggle("#toggle-btn");
     },
     setMateri(event){
-      const res = axios.post('http://167.71.203.32:8081/materi' ,this.data_materi)
+      const res = axios.post('http://localhost:8081/materi' ,this.data_materi)
       this.materi = res.data
       this.kode_materi = ''
-      this.materi =''
+      this.nama_materi =''
       event.target.reset();
       this.$refs["my-modal"].hide();
     },
