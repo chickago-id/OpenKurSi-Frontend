@@ -77,11 +77,8 @@ export default {
   methods: { 
     async save(event){
       try{
-<<<<<<< HEAD
-        const res = await axios.post('http://localhost:8080/buat-akun', this.akun)
-=======
+
         const res = await axios.post('http://localhost:8081/buat-akun', this.akun)
->>>>>>> 3f72d3c056ed620278258f442216cd55c620e0c4
         this.user = res.data
         this.nama_lengkap =''
         this.username = ''
