@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-button id="show-btn" variant="link" @click="showModal" href="#">
-      <div style="color: black">Login.</div>
+      <div style="color: black">Login</div>
     </b-button>
     <div class="asd">
       <b-modal
@@ -118,7 +118,7 @@ label input {
   background-color: transparent;
   border: 0;
   border-bottom: 2px solid #4a4a4a;
-  color: white;
+  color: rgb(0, 0, 0);
   font-size: 26px;
   letter-spacing: -1px;
   outline: 0;
