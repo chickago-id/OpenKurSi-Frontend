@@ -35,7 +35,11 @@
           </div>
           <br />
         </div>
-            <b-table striped hover :items="materi" :fields="fields"> </b-table>  
+            <b-table striped hover :items="materi" :fields="fields"> 
+              <template slot="index" slot-scope="materi">
+                {{ materi.index + 1 }}
+              </template>
+            </b-table>  
       </b-card>
     </b-container>
   </div>
@@ -51,7 +55,7 @@ export default {
   data(){
     return{
       fields:{
-          id:{
+          index:{
             label:'No',
             sortable : true
           },
@@ -64,23 +68,16 @@ export default {
             sortable : true
           },
           action:{
-
           }
       },
       data_materi:{
           nama_materi :'',
           kode_materi :''
         },
-
       materi:[]
-
     }
   },
   mounted(){
-    this.getMateri()
-  },
-
-  updated(){
     this.getMateri()
   },
   
@@ -103,20 +100,19 @@ export default {
       // when the modal has hidden
       this.$refs["my-modal"].toggle("#toggle-btn");
     },
-    setMateri(event){
+    setMateri(){
       axios.post(process.env.VUE_APP_ROOT_API+'/materi' ,this.data_materi)
-        // this.getMateri()
-        // this.data_materi.nama_materi = ''
-        // this.data_materi.kode_materi = ''
-      event.target.reset();
-      // this.materi = res.data
-      // this.data_materi.kode_materi = ''
-      // this.data_materi.nama_materi =''
+        .then(({data}) => {
+          // console.log(data);
+          data.data.forEach(item => {
+            this.materi.push(item)
+          });
+          this.data_materi.nama_materi = '';
+          this.data_materi.kode_materi = '';
+        });
       this.$refs["my-modal"].hide();
     },
-
   }
-
 };
 </script>
 
@@ -124,7 +120,7 @@ export default {
 
 <style>
 .tengah {
-  max-width: 30rem;
+  max-width: 60rem;
   float: center;
 }
 .materitengah {
