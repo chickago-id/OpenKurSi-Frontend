@@ -2,6 +2,8 @@
 <body class="anu">
   <div>
     <b-container style="text-center">
+    <b-alert class="tengah" v-model="showDismissibleAlert" variant="danger" dismissible><p v-html="notif"></p></b-alert>
+    <b-alert class="tengah" v-model="showAlertBerhasil" variant="success" dismissible><p>Login Berhasil</p></b-alert>
       <b-card class="tengah" header="Sign Up">
         <div role="group" >
           <form @submit.prevent="save"> 
@@ -58,7 +60,6 @@ import loginnav from "@/components/Poplog";
 import axios from 'axios';
 
 export default {
-
   components: {
     loginnav
   },
@@ -71,7 +72,11 @@ export default {
         email:"",
         password: ""
       },
-      user:[]
+      showDismissibleAlert: false,
+      showAlertBerhasil: false,
+      user:[],
+      notif: '',
+
     }
   },
   methods: { 
@@ -79,16 +84,46 @@ export default {
       try{
 
         const res = await axios.post(process.env.VUE_APP_ROOT_API+'/buat-akun', this.akun)
-        this.user = res.data
-        this.nama_lengkap =''
-        this.username = ''
-        this.email = ''
-        this.password = ''
-        event.target.reset();
+        if(res.data.status == "ok")
+        {
+          this.showAlertBerhasil = true
+          this.user = res.data.data
+          this.akun.nama_lengkap =''
+          this.akun.username = ''
+          this.akun.email = ''
+          this.akun.password = ''
+          this.password2 = ''
+          event.target.reset();
+        }else{
+          this.showDismissibleAlert = true
+          this.notif = res.data.message
+        }
       }catch(e){
         console.log(e)
       }
      },
+    // async save(event){
+    //     try{
+    //       let obj = this;
+    //       axios.post(process.env.VUE_APP_ROOT_API+'/buat-akun', this.akun).then(function(response){
+    //         console.log(response.data)
+    //         if(response.data.status == "ok"){
+    //           obj.user = response.data.data
+    //           obj.nama_lengkap =''
+    //           obj.username = ''
+    //           obj.email = ''
+    //           obj.password = ''
+    //           event.target.reset();
+    //         }else{
+    //           obj.showDismissibleAlert = true
+    //           obj.notif = response.data.message
+
+    //         }
+    //       })
+    //     }catch(e){
+    //       console.log(e)
+    //     }
+    //   },
     }
   };
 </script>

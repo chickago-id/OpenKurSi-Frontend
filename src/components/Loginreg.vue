@@ -1,9 +1,9 @@
 <template>
 <div>
-            <b-button variant="link" id="show-btn" @click="showModal" href="#"><b><p>Login.</p></b></b-button>
+            <b-link id="show-btn" @click="showModal" href="#"><b>Login</b></b-link>
             <b-modal ref="my-modal" hide-footer title="Login">
               <div class="d-block ">
-                  <form ref="form" @submit.stop.prevent="handleSubmit">
+                  <form ref="form" @submit.prevent="login">
                     <b-form-group
                       :state="nameState"
                       label="Username"
@@ -17,10 +17,9 @@
                         required
                       ></b-form-input>
                     </b-form-group>
-                  </form>
-                  <form ref="form" @submit.stop.prevent="handleSubmit">
+                  
                     <b-form-group
-                      :state="nameState"
+                      :state="passState"
                       label="Password"
                       label-for="name-input"
                       invalid-feedback="Name is required"
@@ -28,21 +27,34 @@
                       <b-form-input
                         id="pass-input"
                         type ="password"
-                        v-model="name"
+                        v-model="password"
                         :state="nameState"
                         required
                       ></b-form-input>
                     </b-form-group>
+                    <b-button class="mt-3" type="submit">Login</b-button>
                   </form>
               </div>
-            <b-button class="mt-3" block @click="hideModal">Login</b-button>
             </b-modal>
           </div>
 </template>
 
 <script>
   export default {
+    data(){
+      return{
+        name : '',
+        password : '', 
+      }
+    },
     methods: {
+      login(){
+        let email = this.name
+        let password = this.password
+        this.$store.dispatch('login', {email, password})
+        .then(() => this.$router.push('/afterlogin'))
+        .catch(err => console.log(err))
+      },
       showModal() {
         this.$refs['my-modal'].show()
       },
