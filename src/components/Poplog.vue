@@ -67,11 +67,11 @@ export default {
   },
   methods: {
     login(){
-      let email = this.username
+      let username = this.username
       let password = this.password
-      this.$store.dispatch('login', {email, password})
+      this.$store.dispatch('login', {username, password})
       .then(() => {
-        this.$router.push('/afterlogin')
+        this.$router.push('/fill')
         this.hideModal()
         })
       .catch(err => console.log(err))
