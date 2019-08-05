@@ -22,13 +22,15 @@
               hide-footer
               style="text-center"
               >
-            <form @submit.prevent="setMateri" >
+            <form @submit.prevent="setMateri">
+            
+              <!-- <b-form-input v-model="data_materi.id" type="hidden"></b-form-input> -->
               <label>Nama Materi</label>
               <b-form-input v-model="data_materi.nama_materi" class="col-8"></b-form-input>
               <label for="input-with-list">Kode Materi</label>
               <b-form-input v-model="data_materi.kode_materi" class="col-5"></b-form-input>
               <div style="text-align:center;">
-                <b-button variant="primary" class="mt-3 btn-sm asd" type="submit" block>Tambah Materi</b-button>
+                <b-button variant="primary" class="mt-3 btn-sm asd" type="submit" block>Simpan Materi</b-button>
               </div>
             </form> 
             </b-modal>
@@ -39,9 +41,9 @@
               <template slot="index" slot-scope="materi">
                 {{ materi.index + 1 }}
               </template>
-              <template slot="Action" >
-                  <b-button size="sm" variant="warning">Edit</b-button>&nbsp;
-                  <b-button size="sm" variant="danger" @click="delete(materi)">Hapus</b-button>
+              <template slot="Action" slot-scope="materi">
+                  <b-button size="sm" variant="warning" @click="editmateri(materi)">Edit</b-button>&nbsp;
+                  <b-button size="sm" variant="danger" @click="delmateri(materi.item.id)">Hapus</b-button>
               </template>
             </b-table>  
       </b-card>
@@ -52,6 +54,7 @@
 
 <script>
 import axios from "axios";
+import { constants } from 'crypto';
 export default {
   components: {
    
@@ -76,6 +79,7 @@ export default {
           }
       },
       data_materi:{
+          id : '',
           nama_materi :'',
           kode_materi :''
         },
@@ -91,7 +95,7 @@ export default {
       axios.get(process.env.VUE_APP_ROOT_API+'/materi')
       .then((response) => {
         this.materi = response.data.data;
-        console.log(response)
+        // console.log(response)
       })
     },
     showModal() {
@@ -106,22 +110,37 @@ export default {
       this.$refs["my-modal"].toggle("#toggle-btn");
     },
     setMateri(){
-      axios.post(process.env.VUE_APP_ROOT_API+'/materi' ,this.data_materi)
-        .then(({data}) => {
-          // console.log(data);
-          data.data.forEach(item => {
-            this.materi.push(item)
+      if(this.data_materi.id != '')
+      {
+        axios.post(process.env.VUE_APP_ROOT_API+'/materi/'+this.data_materi.id, this.data_materi)
+        .then((response) => {
+          // console.log(response)
+          this.getMateri()
+        })
+      }else{ 
+        axios.post(process.env.VUE_APP_ROOT_API+'/materi' ,this.data_materi)
+          .then(({data}) => {
+            // console.log(data);
+            data.data.forEach(item => {
+              this.materi.push(item)
+            });
+            this.data_materi.nama_materi = '';
+            this.data_materi.kode_materi = '';
           });
-          this.data_materi.nama_materi = '';
-          this.data_materi.kode_materi = '';
-        });
+      }
       this.$refs["my-modal"].hide();
     },
-    delete(materi){
-          axios.delete(process.env.VUE_APP_ROOT_API+'materi/id').then(res =>{
-          this.load()
-          let index = this.users.indexOf(form.name)
-          this.users.splice(index,1)
+    editmateri(materi){
+      this.data_materi.id = materi.item.id;
+      this.data_materi.nama_materi = materi.item.nama_materi;
+      this.data_materi.kode_materi = materi.item.kode_materi;
+      this.$refs["my-modal"].show();
+    },
+    delmateri(id){
+          axios.delete(process.env.VUE_APP_ROOT_API+'/materi/'+id)
+          .then(res =>{
+            // console.log(res)
+            this.materi.splice(this.materi.indexOf(id), 1);
       })
     }
   }
