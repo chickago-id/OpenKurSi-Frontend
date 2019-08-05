@@ -36,8 +36,10 @@
             </label>
         </div>
         <div class="text-center">
-          <b-spinner v-if="status=='loading'" variant="primary" ref="Spinner"></b-spinner>
-          <button type="submit" >Login</button>
+           <b-button type="submit" variant="info">
+            <b-spinner  v-if="status=='loading'" small ></b-spinner>
+                Login
+            </b-button>
         </div>
         </form>
         <br />
@@ -179,7 +181,7 @@ label input:valid + .label-text {
   transform: translateY(-74px);
 }
 
-button {
+/*button {
   background-color: #333333;
   border: 2px solid white;
   border-radius: 27px;
@@ -196,7 +198,7 @@ button:focus {
   background-color: white;
   color: #333333;
   outline: 0;
-}
+}*/
 p {
   color: white;
 }

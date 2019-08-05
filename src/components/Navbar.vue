@@ -1,14 +1,15 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="primary">
-      <b-navbar-brand to="/">OpenKursi</b-navbar-brand>
-
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-navbar-brand :to="isLoggedIn?'/afterlogin':'/'" >OpenKursi</b-navbar-brand>
+           <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav v-if="isLoggedIn">
           <!-- <b-nav-item to="/">Home</b-nav-item> -->
           <b-nav-item to="/jadwal">Jadwal</b-nav-item>
-          <b-nav-item to="/admin/kelas">Kelas</b-nav-item>
+          <!--<b-nav-item to="/admin/kelas">Kelas</b-nav-item>-->
+           <b-nav-item to="/nilai">Nilai</b-nav-item>
+
         </b-navbar-nav>
         <!-- Right aligned nav items -->
 
@@ -22,9 +23,14 @@
             <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>-->
           </b-nav-form>
           <b-navbar-nav>
-            <b-nav-item v-if="isLoggedIn" @click="logout">
+            <b-nav-item-dropdown right v-if="isLoggedIn" >
+                <template slot="button-content"><em>Siswa</em></template>
+                <b-dropdown-item to="/profile">Profile</b-dropdown-item>
+                <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
+            </b-nav-item-dropdown>
+           <!-- <b-nav-item v-if="isLoggedIn" @click="logout">
               Logout
-            </b-nav-item>
+            </b-nav-item>-->
             <b-nav-item v-else>
               <Loginnav />
             </b-nav-item>
