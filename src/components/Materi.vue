@@ -39,6 +39,10 @@
               <template slot="index" slot-scope="materi">
                 {{ materi.index + 1 }}
               </template>
+              <template slot="Action" >
+                  <b-button size="sm" variant="warning">Edit</b-button>&nbsp;
+                  <b-button size="sm" variant="danger" @click="delete(materi)">Hapus</b-button>
+              </template>
             </b-table>  
       </b-card>
     </b-container>
@@ -67,7 +71,8 @@ export default {
             label:'Nama Materi',
             sortable : true
           },
-          action:{
+          Action:{
+
           }
       },
       data_materi:{
@@ -112,6 +117,13 @@ export default {
         });
       this.$refs["my-modal"].hide();
     },
+    delete(materi){
+          axios.delete(process.env.VUE_APP_ROOT_API+'materi/id').then(res =>{
+          this.load()
+          let index = this.users.indexOf(form.name)
+          this.users.splice(index,1)
+      })
+    }
   }
 };
 </script>
