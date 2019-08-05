@@ -79,6 +79,10 @@ export default {
   mounted(){
     this.getMateri()
   },
+
+  updated(){
+    this.getMateri()
+  },
   
   methods:{
     getMateri(){
@@ -101,16 +105,15 @@ export default {
     },
     setMateri(event){
       axios.post(process.env.VUE_APP_ROOT_API+'/materi' ,this.data_materi)
+        // this.getMateri()
+        // this.data_materi.nama_materi = ''
+        // this.data_materi.kode_materi = ''
+      event.target.reset();
       // this.materi = res.data
       // this.data_materi.kode_materi = ''
       // this.data_materi.nama_materi =''
-      event.target.reset();
       this.$refs["my-modal"].hide();
     },
-   
-    editMateri(){
-
-    }
 
   }
 

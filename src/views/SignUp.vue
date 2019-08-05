@@ -2,8 +2,25 @@
 <body class="anu">
   <div>
     <b-container style="text-center">
-    <b-alert class="tengah" v-model="showDismissibleAlert" variant="danger" dismissible><p v-html="notif"></p></b-alert>
-    <b-alert class="tengah" v-model="showAlertBerhasil" variant="success" dismissible><p>Login Berhasil</p></b-alert>
+    <!-- <b-alert class="tengah" v-model="showDismissibleAlert" variant="danger" dismissible><p v-html="notif"></p></b-alert> -->
+    <!-- <b-alert class="tengah" v-model="showAlertBerhasil" variant="success" dismissible><p>Pendaftaran Berhasil</p></b-alert> -->
+      <b-alert
+        class="tengah"
+        :show="dismissCountDown"
+        dismissible
+        variant="danger"
+        @dismissed="dismissCountDown=0"
+        @dismiss-count-down="countDownChanged"
+      >
+        <p v-html="notif"></p>
+        <p>This alert will dismiss after {{ dismissCountDown }} seconds...</p>
+        <b-progress
+          variant="warning"
+          :max="dismissSecs"
+          :value="dismissCountDown"
+          height="4px"
+        ></b-progress>
+      </b-alert>
       <b-card class="tengah" header="Sign Up">
         <div role="group" >
           <form @submit.prevent="save"> 
@@ -76,7 +93,8 @@ export default {
       showAlertBerhasil: false,
       user:[],
       notif: '',
-
+      dismissSecs: 3,
+      dismissCountDown: 0,
     }
   },
   methods: { 
@@ -87,6 +105,7 @@ export default {
         if(res.data.status == "ok")
         {
           this.showAlertBerhasil = true
+          // this.showDismissibleAlert = false
           this.user = res.data.data
           this.akun.nama_lengkap =''
           this.akun.username = ''
@@ -95,13 +114,23 @@ export default {
           this.password2 = ''
           event.target.reset();
         }else{
-          this.showDismissibleAlert = true
+          // this.showDismissibleAlert = true
+          this.showAlertBerhasil = false
           this.notif = res.data.message
+          // this.pesangagal(this.notif)
+          // this.$bvModal.show('bv-modal-example')
+          this.showAlert()
         }
       }catch(e){
         console.log(e)
       }
      },
+    countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown
+      },
+    showAlert() {
+        this.dismissCountDown = this.dismissSecs
+      }
     // async save(event){
     //     try{
     //       let obj = this;
