@@ -80,7 +80,7 @@ let router = new Router({
     {
       path: "/jadwal",
       name: "jadwal",
-      component: () => import("./views/Penjadwal.vue")
+      component: () => import("./views/Jadwal.vue")
     },
     {
       path: "/materi",
@@ -95,12 +95,27 @@ let router = new Router({
     {
       path: "/absensi",
       name: "absensi",
-      component: () => import("./views/Absensi.vue") 
+      component: () => import("./views/Absensi.vue")
     },
     {
       path: "/fill",
       name: 'lengkapi',
       component: () => import('./views/Vlengkapi.vue')
+    },
+    {
+      path: "/tes",
+      name: 'tes',
+      component: () => import('./views/Tes.vue')
+    },
+    {
+      path: "/profile",
+      name: 'profile',
+      component: () => import('./views/Vprofile.vue')
+    },
+    {
+      path: "/addjadwal",
+      name: 'addjadwal',
+      component: () => import('./views/Vaddjadwal.vue')
     }
   ]
 })

@@ -8,7 +8,8 @@
         @click="showModal"
         href="#"
       >Tambah</b-button>
-      <b-modal
+    
+        <b-modal
         variant="primary"
         title="Materi"
         header-bg-variant="warning"
@@ -17,18 +18,35 @@
         hide-footer
         style="text-center"
       >
+      <form @submit.prevent="setMateri" >
         <label>Nama Materi</label>
-        <b-form-input class="col-5"></b-form-input>
+        <b-form-input v-model="data_materi.nama_materi" class="col-8"></b-form-input>
         <label for="input-with-list">Kode Materi</label>
-        <b-form-input class="col-7"></b-form-input>
-        <b-button variant="primary" class="mt-3 btn-sm" block @click="hideModal">Tambah Materi</b-button>
+        <b-form-input v-model="data_materi.kode_materi" class="col-5"></b-form-input>
+        <div style="text-align:center;">
+          <b-button variant="primary" class="mt-3 btn-sm asd" type="submit" block>Tambah Materi</b-button>
+        </div>
+      </form> 
       </b-modal>
+ 
+      
     </div>
   </container>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
+   data(){
+      return{
+        data_materi:{
+          nama_materi :'',
+          kode_materi :''
+        },
+        materi:[]
+      }
+   },
+
   methods: {
     showModal() {
       this.$refs["my-modal"].show();
@@ -40,14 +58,22 @@ export default {
       // We pass the ID of the button that we want to return focus to
       // when the modal has hidden
       this.$refs["my-modal"].toggle("#toggle-btn");
-    }
+    },
+    setMateri(event){
+      const res = axios.post('http://localhost:8081/materi' ,this.data_materi)
+      this.materi = res.data
+      this.kode_materi = ''
+      this.nama_materi =''
+      event.target.reset();
+      this.$refs["my-modal"].hide();
+    },
   }
 };
 </script>
 
-<style>
+<style scoped>
 .block {
-  max-width: 40rem;
+  max-width: 20rem;
   float: center;
 }
 p {
@@ -59,8 +85,12 @@ label {
 title {
   text-align: center;
 }
-
+.asd {
+  max-width: 7rem;
+  margin-left: 30%;
+}
 form {
-  display: inline-block;
+  width: 90%;
+  background-color: #c0d7f8;
 }
 </style>
