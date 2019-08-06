@@ -29,7 +29,7 @@ export default new Router({
     {
       path: "/jadwal",
       name: "jadwal",
-      component: () => import("./views/Penjadwal.vue")
+      component: () => import("./views/Jadwal.vue")
     },
     {
       path: "/materi",
@@ -55,6 +55,16 @@ export default new Router({
       path: "/tes",
       name: 'tes',
       component: () => import('./views/Tes.vue')
+    },
+    {
+      path: "/profile",
+      name: 'profile',
+      component: () => import('./views/Vprofile.vue')
+    },
+    {
+      path: "/addjadwal",
+      name: 'addjadwal',
+      component: () => import('./views/Vaddjadwal.vue')
     }
   ]
 });

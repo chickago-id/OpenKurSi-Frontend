@@ -37,7 +37,7 @@
             </b-table>  
           </div>
            <div class="text-right">
-              <b-button  @click="print">Recap</b-button>
+              <b-button @click="print">Recap</b-button>
            </div>
         
 
