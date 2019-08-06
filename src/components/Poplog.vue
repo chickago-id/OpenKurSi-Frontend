@@ -27,7 +27,7 @@
         <div class="d-block">
             <label>
               <input type="text" id="username" v-model="username" required />
-              <div class="label-text">username/email</div>
+              <div class="label-text">Username</div>
             </label>
             <br />
             <label>
