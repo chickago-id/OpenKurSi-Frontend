@@ -71,7 +71,7 @@ export default {
       let password = this.password
       this.$store.dispatch('login', {username, password})
       .then(() => {
-        this.$router.push('/afterlogin')
+        this.$router.push('/fill')
         this.hideModal()
         })
       .catch(err => console.log(err))
