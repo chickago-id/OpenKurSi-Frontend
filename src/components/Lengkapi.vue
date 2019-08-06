@@ -58,16 +58,18 @@
                             </b-form-group>
                             
                             <b-form-group label="Provinsi">
-                                <b-form-input type="text" id="provinsi" v-model="form.provinsi"></b-form-input>
-                                 <!-- <b-form-select :options="provinsi"></b-form-select> -->
+                                <!-- <b-form-input type="text" id="provinsi" v-model="form.provinsi"></b-form-input> -->
+                                 <b-form-select :options="provinsiops" v-model="selectprov" @change="getKabupaten()"></b-form-select>
                             </b-form-group>
 
                             <b-form-group label="Kabupaten">
-                                <b-form-input type="text" id="kabupaten" v-model="form.kabupaten"></b-form-input>
+                                <!-- <b-form-input type="text" id="kabupaten" v-model="form.kabupaten"></b-form-input> -->
+                                <b-form-select :options="kabops" v-model="selectkab" @change="getKecamatan()"></b-form-select>
                             </b-form-group>
 
                             <b-form-group label="Kecamatan">
-                                <b-form-input type="text" id="kecamatan" v-model="form.kecamatan"></b-form-input>
+                                <!-- <b-form-input type="text" id="kecamatan" v-model="form.kecamatan"></b-form-input> -->
+                                <b-form-select :options="disops" v-model="selectdis"></b-form-select>
                             </b-form-group>
 
                             <b-form-group label="Kode Pos">
@@ -96,6 +98,7 @@
 
 <script>
 import axios from 'axios';
+import Loc from 'administratif-indonesia';
 export default {
     data(){
         return{
@@ -117,9 +120,14 @@ export default {
                 instagram: '',
                 facebook:'',
             },
+            selectprov: '0',
+            selectkab: '0',
+            selectdis: '0',
             error:[],
             biodata:[],
-            provinsi:[],
+            provinsiops:[{'text': 'Silakan Pilih', 'value':'0'}],
+            kabops:[{'text': 'Silakan Pilih', 'value':'0'}],
+            disops:[{'text': 'Silakan Pilih', 'value':'0'}],
             kabupaten:[],
             kecamatan:[],
         }
@@ -163,26 +171,65 @@ export default {
           }
      },
      getProvinsi(){
-        axios.get('https://').then((response) => {
-        this.provinsi = response.data;
-        console.log(response)
-      })
-     },
-     getKabupaten(id){
-        axios.get('https://').then((response) => {
-            this.kabupaten = response.data
-        })
-     },
-     getKecamatan(id){
-        axios.get('https://').then((response) => {
-            this.kecamatan = response.data
-        })
-     },
-     ubahKab(){
-
-     },
-     ubahKec(){
+        // const ai = new AdministratifIndonesia(); 
+        // console.log(Loc.all())
+        // const ai = new Loc()
+        // console.log(JSON.stringify(ai.all(), null, '\t'));
         
+        axios.get('https://raw.githubusercontent.com/yusufsyaifudin/wilayah-indonesia/master/data/list_of_area/provinces.json').then((response) => {
+            // this.provinsiops = response.data
+            // console.log(response)
+            response.data.forEach(prov => {
+                // let text = prov.name
+                // let value = prov.id
+                this.provinsiops.push({
+                    text: prov.name,
+                    value: prov.id
+                })
+            });
+        })
+     },
+     getKabupaten(){
+        this.kabops = []
+        this.disops = []
+        axios.get('https://raw.githubusercontent.com/yusufsyaifudin/wilayah-indonesia/master/data/list_of_area/regencies.json').then((response) => {
+            // console.log(this.selectprov, response)
+            // this.kabupaten = response.data
+            this.kabops.push({
+                text: 'Silakan Pilih',
+                value: '0'
+            })
+            this.selectkab = '0'
+            response.data.forEach(kab => {
+                if(kab.province_id == this.selectprov)
+                {
+                    this.kabops.push({
+                        text: kab.name,
+                        value: kab.id
+                    })
+                }
+            })
+        })
+     },
+     getKecamatan(){
+        this.disops = []
+        axios.get('https://raw.githubusercontent.com/yusufsyaifudin/wilayah-indonesia/master/data/list_of_area/districts.json')
+        .then((response) => {
+            this.disops.push({
+                text: 'Silakan Pilih',
+                value: '0'
+            })
+            this.selectdis = '0'
+            response.data.forEach(kec => {
+                if(kec.regency_id == this.selectkab)
+                {
+                    this.disops.push({
+                        text: kec.name,
+                        value: kec.id
+                    })
+                }
+            })
+        })
      }
     }
 }
