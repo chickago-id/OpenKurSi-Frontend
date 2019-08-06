@@ -8,7 +8,48 @@
                     <h3>Kelas</h3>
                 </div>
                     <div class="text-right" style="padding: 5px;">
-                        <b-button to="/admin/kelas/tambah" size="sm" variant="primary" class="justify-content-right">Tambah</b-button>
+                        <b-button
+                              v-b-modal.modal-sm
+                              variant="primary"
+                              id="show-btn"
+                              @click="showModal"
+                              href="#"
+                            >Tambah</b-button>
+                        <b-modal
+                            variant="primary"
+                              title="Tambah Kelas"
+                              header-bg-variant="primary"
+                              
+                              ref="my-modal"
+                              hide-footer
+                              style="text-center"
+                        >
+                      <b-form>
+                        <b-form-group label="Nama Materi">
+                          <b-form-select id="namamateri" :options="namamateri">
+                             <option>Please select an option</option></b-form-select>
+                        </b-form-group>
+
+                        <b-form-group label="Jam Pilihan">
+                                <timeselector v-model="time"></timeselector>
+                        </b-form-group>
+
+                        <b-form-group label="Tangal Mulai">
+                          <b-form-input type="date" id="tgl_mulai"></b-form-input>
+                        </b-form-group>
+
+                        <b-form-group label="Target Peserta">
+                          <b-form-input id="target" type="number" min="0"></b-form-input>
+                        </b-form-group>
+                        <b-form-group label="Status">
+                          <b-form-select id="status" type="text" :options="status"></b-form-select>
+                        </b-form-group>
+                        <div class="text-center">
+                          <b-button type="submit" size="sm" variant="primary">Simpan</b-button>&nbsp;
+                          <b-button to="/admin/kelas" size="sm" variant="danger">Kembali</b-button>
+                        </div>
+                      </b-form>
+                        </b-modal>
                     </div>
                 <b-table striped hover :items="items" :fields="fields">
                     <template slot="Action">
@@ -16,49 +57,56 @@
                         <b-button size="sm" variant="danger">Hapus</b-button>
                     </template>
                 </b-table>
-                <!-- <table class="table table-responsive table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>Kode</th>
-                            <th>Kelas</th>
-                            <th>Jam Pilihan</th>
-                            <th>Tanggal Mulai</th>
-                            <th>Target Peserta</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody v-for="">
-                        <tr>
-                            
-                        </tr>   
-                </table> -->
             </b-card>
         </b-container>
 </template>
 
 <script>
 import axios from 'axios'
+import Timeselector from 'vue-timeselector';
 
 export default {
+    components: {
+        Timeselector
+    },
     data() {
       return {
-        fields: ['kode', 'kelas', 'jam_pilihan', 'tanggal_mulai', 'target_peserta', 'Action'],
-        items: []
+        fields: ['kode', 'nama_materi', 'jam_pilihan', 'tanggal_mulai', 'target_peserta','status', 'Action'],
+        items: [],
+        status:['Aktif','Pending'],
+        time:null,
+        namamateri:[]
       }
     },
-    mounted(){
-        axios.get('https://api.myjson.com/bins/1hf6wh')
-        .then((response)=> {
-            this.items = response.data.kelas;
-            console.log(response)
+    methods:{
+    showModal() {
+      this.$refs["my-modal"].show();
+    },
+    hideModal() {
+      this.$refs["my-modal"].hide();
+    },
+    toggleModal() {
+      // We pass the ID of the button that we want to return focus to
+      // when the modal has hidden
+      this.$refs["my-modal"].toggle("#toggle-btn");
+    },
+    getMateri(){
+    axios.get(process.env.VUE_APP_ROOT_API+'/materi')
+      .then((response) => {
+        // this.namamateri = response.data.data;
+        // console.log(response)
+        response.data.data.forEach(materi => {
+            this.namamateri.push(materi.nama_materi)
         })
-        
-    }
-    // data(){
-    //     return{
-    //         item: null
-    //     }
-    // }
+      })
+    },    
+
+    },
+
+    mounted(){
+       this.getMateri();  
+    },
+  
 }
 </script>
 
