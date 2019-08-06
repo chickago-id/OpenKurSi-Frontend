@@ -27,7 +27,7 @@
         <div class="d-block">
             <label>
               <input type="text" id="username" v-model="username" required />
-              <div class="label-text">username/email</div>
+              <div class="label-text">Username</div>
             </label>
             <br />
             <label>
@@ -67,9 +67,9 @@ export default {
   },
   methods: {
     login(){
-      let email = this.username
+      let username = this.username
       let password = this.password
-      this.$store.dispatch('login', {email, password})
+      this.$store.dispatch('login', {username, password})
       .then(() => {
         this.$router.push('/afterlogin')
         this.hideModal()
