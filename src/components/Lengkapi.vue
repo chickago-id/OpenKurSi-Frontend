@@ -57,16 +57,17 @@
                                 <b-form-input type="text" id="alamat" v-model="form.alamat"></b-form-input>
                             </b-form-group>
                             
-                            <b-form-group label="Kecamatan">
-                                <b-form-input type="text" id="kecamatan" v-model="form.kecamatan"></b-form-input>
+                            <b-form-group label="Provinsi">
+                                <b-form-input type="text" id="provinsi" v-model="form.provinsi"></b-form-input>
+                                 <!-- <b-form-select :options="provinsi"></b-form-select> -->
                             </b-form-group>
 
                             <b-form-group label="Kabupaten">
                                 <b-form-input type="text" id="kabupaten" v-model="form.kabupaten"></b-form-input>
                             </b-form-group>
 
-                            <b-form-group label="Provinsi">
-                                <b-form-input type="text" id="provinsi" v-model="form.provinsi"></b-form-input>
+                            <b-form-group label="Kecamatan">
+                                <b-form-input type="text" id="kecamatan" v-model="form.kecamatan"></b-form-input>
                             </b-form-group>
 
                             <b-form-group label="Kode Pos">
@@ -75,6 +76,9 @@
 
                             <b-form-group label="Instagram">
                                 <b-form-input type="text" id="instagram" v-model="form.instagram"></b-form-input>
+                            </b-form-group>
+                             <b-form-group label="facebook">
+                                <b-form-input type="text" id="facebook" v-model="form.facebook"></b-form-input>
                             </b-form-group>
                         </td>
                     </tr>
@@ -111,10 +115,17 @@ export default {
                 provinsi: '',
                 kode_pos: '',
                 instagram: '',
+                facebook:'',
             },
             error:[],
-            biodata:[]
+            biodata:[],
+            provinsi:[],
+            kabupaten:[],
+            kecamatan:[],
         }
+    },
+    mounted(){
+        this.getProvinsi()
     },
     methods:{
         checkform: function(e){
@@ -144,12 +155,35 @@ export default {
                 this.provinsi= ''
                 this.kode_pos= ''
                 this.instagram= ''
+                this.facebook=''
                 event.target.reset()
                 console.log(this.tempat_lahir);
           }catch(e){
             console.log(e)
           }
      },
+     getProvinsi(){
+        axios.get('https://').then((response) => {
+        this.provinsi = response.data;
+        console.log(response)
+      })
+     },
+     getKabupaten(id){
+        axios.get('https://').then((response) => {
+            this.kabupaten = response.data
+        })
+     },
+     getKecamatan(id){
+        axios.get('https://').then((response) => {
+            this.kecamatan = response.data
+        })
+     },
+     ubahKab(){
+
+     },
+     ubahKec(){
+        
+     }
     }
 }
 </script>
