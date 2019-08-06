@@ -51,6 +51,21 @@
 <script>
 export default {
   methods: {
+<<<<<<< HEAD
+=======
+    login(){
+      let username = this.username
+      let password = this.password
+      this.$store.dispatch('login', {username, password})
+      .then(() => {
+        this.$router.push('/fill')
+        this.hideModal()
+        })
+      .catch(err => console.log(err))
+    },
+
+
+>>>>>>> e15a4c155fe1a34695ccd61b629ada69a7cb895b
     showModal() {
       this.$refs["my-modal"].show();
     },

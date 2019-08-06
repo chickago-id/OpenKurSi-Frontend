@@ -60,12 +60,13 @@ export default {
       this.$refs["my-modal"].toggle("#toggle-btn");
     },
     setMateri(event){
-      const res = axios.post('http://localhost:8081/materi' ,this.data_materi)
+      const res = axios.post(process.env.VUE_APP_ROOT_API+'/materi' ,this.data_materi)
       this.materi = res.data
       this.kode_materi = ''
       this.nama_materi =''
       event.target.reset();
       this.$refs["my-modal"].hide();
+
     },
   }
 };
