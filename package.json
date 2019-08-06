@@ -14,6 +14,7 @@
     "core-js": "^2.6.5",
     "vue": "^2.6.10",
     "vue-router": "^3.0.7",
+    "vue-timeselector": "^0.1.7",
     "vuex": "^3.1.1"
   },
   "devDependencies": {
