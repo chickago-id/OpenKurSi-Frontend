@@ -103,19 +103,13 @@ export default {
       })
     },
     setKelas(){
-
-        axios.post('http://localhost:3000/kelas', this.kelas)
-         .then(({data}) => {
-            // console.log(data);
-            data.data.forEach(item => {
-              this.kelas.push(item)
-            });
-            this.kelas.namamateri='';
-            this.kelas.jam_pilihan ='';
-            this.kelas.tgl_mulai='';
-            this.kelas.target_peserta='';
-            this.kelas.status='';
-          });
+        const res = axios.post('http://192.168.43.117:3000/kelas', this.kelas); 
+                console.log(res)
+                this.kelas.namamateri='';
+                this.kelas.jam_pilihan ='';
+                this.kelas.tgl_mulai='';
+                this.kelas.target_peserta='';
+                this.kelas.status='';
 
             this.$refs["my-modal"].hide();
            
