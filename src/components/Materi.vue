@@ -158,8 +158,6 @@ export default {
 };
 </script>
 
-
-
 <style>
 .tengah {
   max-width: 60rem;

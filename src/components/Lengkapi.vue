@@ -69,7 +69,7 @@
 
                             <b-form-group label="Kecamatan">
                                 <!-- <b-form-input type="text" id="kecamatan" v-model="form.kecamatan"></b-form-input> -->
-                                <b-form-select :options="disops" v-model="selectdis"></b-form-select>
+                                <b-form-select :options="disops" v-model="selectdis" @change="setDistrict()"></b-form-select>
                             </b-form-group>
 
                             <b-form-group label="Kode Pos">
@@ -184,7 +184,7 @@ export default {
                 // let value = prov.id
                 this.provinsiops.push({
                     text: prov.name,
-                    value: prov.id
+                    value: prov
                 })
             });
         })
@@ -192,6 +192,7 @@ export default {
      getKabupaten(){
         this.kabops = []
         this.disops = []
+        this.form.provinsi = this.selectprov.name
         axios.get('https://raw.githubusercontent.com/yusufsyaifudin/wilayah-indonesia/master/data/list_of_area/regencies.json').then((response) => {
             // console.log(this.selectprov, response)
             // this.kabupaten = response.data
@@ -205,18 +206,20 @@ export default {
             })
             this.selectkab = '0'
             response.data.forEach(kab => {
-                if(kab.province_id == this.selectprov)
+                if(kab.province_id == this.selectprov.id)
                 {
                     this.kabops.push({
                         text: kab.name,
-                        value: kab.id
+                        value: kab
                     })
                 }
             })
         })
+        console.log(this.form.provinsi)
      },
      getKecamatan(){
         this.disops = []
+        this.form.kabupaten = this.selectkab.name
         axios.get('https://raw.githubusercontent.com/yusufsyaifudin/wilayah-indonesia/master/data/list_of_area/districts.json')
         .then((response) => {
             this.disops.push({
@@ -225,15 +228,20 @@ export default {
             })
             this.selectdis = '0'
             response.data.forEach(kec => {
-                if(kec.regency_id == this.selectkab)
+                if(kec.regency_id == this.selectkab.id)
                 {
                     this.disops.push({
                         text: kec.name,
-                        value: kec.id
+                        value: kec
                     })
                 }
             })
         })
+        console.log(this.form.kabupaten)
+     },
+     setDistrict(){
+         this.form.kecamatan = this.selectdis.name
+         console.log(this.form.kecamatan)
      }
     }
 }
