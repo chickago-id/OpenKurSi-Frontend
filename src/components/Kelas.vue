@@ -2,7 +2,6 @@
     
         <b-container>
             <b-card
-                
             >
                 <div slot="header">
                     <h3>Kelas</h3>
@@ -31,7 +30,7 @@
                         </b-form-group>
 
                         <b-form-group label="Jam Pilihan">
-                                <timeselector v-model="kelas.time"></timeselector>
+                             <b-form-input type="time" id="jam_pilihan" v-model='kelas.jam_pilihan'></b-form-input>
                         </b-form-group>
 
                         <b-form-group label="Tangal Mulai">
@@ -39,7 +38,7 @@
                         </b-form-group>
 
                         <b-form-group label="Target Peserta">
-                          <b-form-input id="target" type="number" min="0"></b-form-input>
+                          <b-form-input id="target" type="number" min="0" v-model="kelas.target_peserta"></b-form-input>
                         </b-form-group>
                         <b-form-group label="Status">
                           <b-form-select id="status" type="text" :options="status" v-model="kelas.status"></b-form-select>
@@ -63,23 +62,20 @@
 
 <script>
 import axios from 'axios'
-import Timeselector from 'vue-timeselector';
 
 export default {
-    components: {
-        Timeselector
-    },
+    
     data() {
       return {
         fields: ['kode', 'nama_materi', 'jam_pilihan', 'tanggal_mulai', 'target_peserta','status', 'Action'],
         items: [],
         status:['Aktif','Pending'],
         kelas:{
-            time:null,
             namamateri:null,
+            jam_pilihan:'',
             tgl_mulai:'',
+            target_peserta :'',
             status:''
-
         },
         namamateriops:[{'text': 'Silakan Pilih', 'value':null}]
       }
@@ -107,12 +103,21 @@ export default {
       })
     },
     setKelas(){
-        axios.post(process.env.VUE_APP_ROOT_API+'/kelas' , this.kelas)
-        this.$refs["my-modal"].hide();
-            this.kelas.time=''
-            this.kelas.namamateri=''
-            this.kelas.tgl_mulai=''
-            this.kelas.status=''
+
+        axios.post('http://localhost:3000/kelas', this.kelas)
+         .then(({data}) => {
+            // console.log(data);
+            data.data.forEach(item => {
+              this.kelas.push(item)
+            });
+            this.kelas.namamateri='';
+            this.kelas.jam_pilihan ='';
+            this.kelas.tgl_mulai='';
+            this.kelas.target_peserta='';
+            this.kelas.status='';
+          });
+
+            this.$refs["my-modal"].hide();
            
     },    
 
