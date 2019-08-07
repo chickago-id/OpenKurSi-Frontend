@@ -7,7 +7,7 @@
                 <div slot="header">
                     <h3>Kelas</h3>
                 </div>
-                    <div class="text-right" style="padding: 5px;">
+                    <div class="text-right" style="padding: 5px;" >
                         <b-button
                               v-b-modal.modal-sm
                               variant="primary"
@@ -24,25 +24,25 @@
                               hide-footer
                               style="text-center"
                         >
-                      <b-form>
+                      <b-form @submit.prevent="setKelas">
                         <b-form-group label="Nama Materi">
-                          <b-form-select id="namamateri" :options="namamateri">
-                             <option>Please select an option</option></b-form-select>
+                          <b-form-select id="namamateri" :options="namamateriops" v-model="kelas.namamateri">
+                             </b-form-select>
                         </b-form-group>
 
                         <b-form-group label="Jam Pilihan">
-                                <timeselector v-model="time"></timeselector>
+                                <timeselector v-model="kelas.time"></timeselector>
                         </b-form-group>
 
                         <b-form-group label="Tangal Mulai">
-                          <b-form-input type="date" id="tgl_mulai"></b-form-input>
+                          <b-form-input type="date" id="tgl_mulai" v-model='kelas.tgl_mulai'></b-form-input>
                         </b-form-group>
 
                         <b-form-group label="Target Peserta">
                           <b-form-input id="target" type="number" min="0"></b-form-input>
                         </b-form-group>
                         <b-form-group label="Status">
-                          <b-form-select id="status" type="text" :options="status"></b-form-select>
+                          <b-form-select id="status" type="text" :options="status" v-model="kelas.status"></b-form-select>
                         </b-form-group>
                         <div class="text-center">
                           <b-button type="submit" size="sm" variant="primary">Simpan</b-button>&nbsp;
@@ -74,17 +74,21 @@ export default {
         fields: ['kode', 'nama_materi', 'jam_pilihan', 'tanggal_mulai', 'target_peserta','status', 'Action'],
         items: [],
         status:['Aktif','Pending'],
-        time:null,
-        namamateri:[]
+        kelas:{
+            time:null,
+            namamateri:null,
+            tgl_mulai:'',
+            status:''
+
+        },
+        namamateriops:[{'text': 'Silakan Pilih', 'value':null}]
       }
     },
     methods:{
     showModal() {
       this.$refs["my-modal"].show();
     },
-    hideModal() {
-      this.$refs["my-modal"].hide();
-    },
+    
     toggleModal() {
       // We pass the ID of the button that we want to return focus to
       // when the modal has hidden
@@ -96,9 +100,20 @@ export default {
         // this.namamateri = response.data.data;
         // console.log(response)
         response.data.data.forEach(materi => {
-            this.namamateri.push(materi.nama_materi)
+            this.namamateriops.push({'text' : materi.nama_materi,
+                'value' : materi.id
+            })
         })
       })
+    },
+    setKelas(){
+        axios.post(process.env.VUE_APP_ROOT_API+'/kelas' , this.kelas)
+        this.$refs["my-modal"].hide();
+            this.kelas.time=''
+            this.kelas.namamateri=''
+            this.kelas.tgl_mulai=''
+            this.kelas.status=''
+           
     },    
 
     },
