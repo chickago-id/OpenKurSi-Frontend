@@ -109,17 +109,22 @@ export default {
       this.$refs["my-modal"].toggle("#toggle-btn");
     },
     setMateri(){
+      const token = 'Bearer '+localStorage.getItem('token')
+      const ndas = {
+        'Authorization' : token,
+        'Content-Type' : 'application/json'
+      }
       if(this.data_materi.id != '')
       {
-        axios.post(process.env.VUE_APP_ROOT_API+'/materi/'+this.data_materi.id, this.data_materi)
+        axios.post(process.env.VUE_APP_ROOT_API+'/materi/'+this.data_materi.id, this.data_materi, { headers: ndas })
         .then((response) => {
-          // console.log(response)
+          // console.log(response, token)
           this.getMateri()
         })
       }else{ 
-        axios.post(process.env.VUE_APP_ROOT_API+'/materi' ,this.data_materi)
+        axios.post(process.env.VUE_APP_ROOT_API+'/materi', this.data_materi, { headers: ndas })
           .then(({data}) => {
-            // console.log(data);
+            console.log(data, token);
             data.data.forEach(item => {
               this.materi.push(item)
             });

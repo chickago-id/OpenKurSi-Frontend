@@ -199,6 +199,10 @@ export default {
                 text: 'Silakan Pilih',
                 value: '0'
             })
+            this.disops.push({
+                text: 'Silakan Pilih',
+                value: '0'
+            })
             this.selectkab = '0'
             response.data.forEach(kab => {
                 if(kab.province_id == this.selectprov)
