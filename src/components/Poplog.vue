@@ -51,8 +51,7 @@
 <script>
 export default {
   methods: {
-<<<<<<< HEAD
-=======
+
     login(){
       let username = this.username
       let password = this.password
@@ -65,7 +64,6 @@ export default {
     },
 
 
->>>>>>> e15a4c155fe1a34695ccd61b629ada69a7cb895b
     showModal() {
       this.$refs["my-modal"].show();
     },
