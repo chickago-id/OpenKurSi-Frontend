@@ -27,7 +27,7 @@
           <form ref="form" variant="dark" @submit.stop.prevent="handleSubmit">
             <label>
               <input type="text" id="username" v-model="username" required />
-              <div class="label-text">username/email</div>
+              <div class="label-text">Username</div>
             </label>
             <br />
             <label>

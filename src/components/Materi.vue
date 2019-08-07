@@ -43,7 +43,7 @@
               </template>
               <template slot="Action" slot-scope="materi">
                   <b-button size="sm" variant="warning" @click="editmateri(materi)">Edit</b-button>&nbsp;
-                  <b-button size="sm" variant="danger" @click="delmateri(materi.item.id)">Hapus</b-button>
+                  <b-button size="sm" variant="danger" @click="delmateri(materi.index)">Hapus</b-button>
               </template>
             </b-table>  
       </b-card>
@@ -109,17 +109,22 @@ export default {
       this.$refs["my-modal"].toggle("#toggle-btn");
     },
     setMateri(){
+      const token = 'Bearer '+localStorage.getItem('token')
+      const ndas = {
+        'Authorization' : token,
+        'Content-Type' : 'application/json'
+      }
       if(this.data_materi.id != '')
       {
-        axios.post(process.env.VUE_APP_ROOT_API+'/materi/'+this.data_materi.id, this.data_materi)
+        axios.post(process.env.VUE_APP_ROOT_API+'/materi/'+this.data_materi.id, this.data_materi, { headers: ndas })
         .then((response) => {
-          // console.log(response)
+          // console.log(response, token)
           this.getMateri()
         })
       }else{ 
-        axios.post(process.env.VUE_APP_ROOT_API+'/materi' ,this.data_materi)
+        axios.post(process.env.VUE_APP_ROOT_API+'/materi', this.data_materi, { headers: ndas })
           .then(({data}) => {
-            // console.log(data);
+            console.log(data, token);
             data.data.forEach(item => {
               this.materi.push(item)
             });
@@ -135,18 +140,23 @@ export default {
       this.data_materi.kode_materi = materi.item.kode_materi;
       this.$refs["my-modal"].show();
     },
-    delmateri(id){
-          axios.delete(process.env.VUE_APP_ROOT_API+'/materi/'+id)
-          .then(res =>{
-            // console.log(res)
-            this.materi.splice(this.materi.indexOf(id), 1);
+    delmateri(index){
+      const token = 'Bearer '+localStorage.getItem('token')
+      const ndas = {
+        'Authorization' : token,
+        'Content-Type' : 'application/json'
+      }
+      const id = this.materi[index].id
+      console.log(index, id)
+      axios.delete(process.env.VUE_APP_ROOT_API+'/materi/'+id, { headers: ndas })
+      .then(res =>{
+        console.log(res)
+        this.materi.splice(index, 1);
       })
     }
   }
 };
 </script>
-
-
 
 <style>
 .tengah {

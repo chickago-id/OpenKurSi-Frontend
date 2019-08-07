@@ -65,6 +65,6 @@ export default new Router({
       path: "/addjadwal",
       name: 'addjadwal',
       component: () => import('./views/Vaddjadwal.vue')
-    }
+    },
   ]
 });
