@@ -34,7 +34,7 @@
                         </b-form-group>
 
                         <b-form-group label="Tangal Mulai">
-                          <b-form-input type="date" id="tgl_mulai" v-model='data_kelas.tgl_mulai'></b-form-input>
+                          <b-form-input type="date" id="tgl_mulai" v-model='data_kelas.tanggal_mulai'></b-form-input>
                         </b-form-group>
 
                         <b-form-group label="Target Peserta">
@@ -98,7 +98,7 @@ export default {
             kode_kelas:'',
             id_materi:null,
             jam_pilihan:'',
-            tgl_mulai:'',
+            tanggal_mulai:'',
             target_peserta :'',
             jenis_kelas:null,
             biaya:'',
@@ -136,13 +136,13 @@ export default {
           'id_materi' : this.data_kelas.id_materi,
           'kode_kelas' : this.data_kelas.kode_kelas,
           'jam_pilihan' : this.data_kelas.jam_pilihan,
-          'tgl_mulai' : this.data_kelas.tgl_mulai,
+          'tanggal_mulai' : this.data_kelas.tanggal_mulai,
           'target_peserta' :  this.data_kelas.target_peserta,
           'jenis_kelas' : this.data_kelas.jenis_kelas,
           'biaya' : this.data_kelas.biaya,
           'jumlah_pertemuan' : this.data_kelas.jumlah_pertemuan,
           'status' : this.data_kelas.status,
-          'kode_kelas' : this.data_kelas.id_materi +'.'+ this.data_kelas.jam_pilihan + '.' + this.data_kelas.tgl_mulai
+          'kode_kelas' : this.data_kelas.id_materi +'.'+ this.data_kelas.jam_pilihan + '.' + this.data_kelas.tanggal_mulai
         };
         console.log(isi)
         const token = 'Bearer '+localStorage.getItem('token')
@@ -150,9 +150,9 @@ export default {
             'Authorization' : token,
             'Content-Type' : 'application/json'
         }
-         if(this.kelas.id != '')
+         if(this.data_kelas.id != '')
           {
-            axios.post(process.env.VUE_APP_ROOT_API+'/kelas/'+this.kelas.id, this.kelas, { headers: ndas })
+            axios.post(process.env.VUE_APP_ROOT_API+'/kelas/'+this.data_kelas.id, this.isi, { headers: ndas })
             .then((response) => {
               // console.log(response, token)
               this.getKelas()
@@ -168,7 +168,7 @@ export default {
                 this.data_kelas.id_materi='';
                 this.data_kelas.kode_kelas='';
                 this.data_kelas.jam_pilihan ='';
-                this.data_kelas.tgl_mulai='';
+                this.data_kelas.tanggal_mulai='';
                 this.data_kelas.target_peserta='';
                 this.data_kelas.jenis_kelas='';
                 this.data_kelas.biaya='';
