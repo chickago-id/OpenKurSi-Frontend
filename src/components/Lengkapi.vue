@@ -170,13 +170,15 @@ export default {
             console.log(e)
           }
      },
-     getProvinsi(){
+     async getProvinsi(){
         // const ai = new AdministratifIndonesia(); 
         // console.log(Loc.all())
         // const ai = new Loc()
         // console.log(JSON.stringify(ai.all(), null, '\t'));
         
-        axios.get('https://raw.githubusercontent.com/yusufsyaifudin/wilayah-indonesia/master/data/list_of_area/provinces.json').then((response) => {
+        // axios.get('https://raw.githubusercontent.com/yusufsyaifudin/wilayah-indonesia/master/data/list_of_area/provinces.json')
+        axios.get('http://localhost:8080/provinsi.json')
+        .then((response) => {
             // this.provinsiops = response.data
             // console.log(response)
             response.data.forEach(prov => {
@@ -193,7 +195,7 @@ export default {
         this.kabops = []
         this.disops = []
         this.form.provinsi = this.selectprov.name
-        axios.get('https://raw.githubusercontent.com/yusufsyaifudin/wilayah-indonesia/master/data/list_of_area/regencies.json').then((response) => {
+        axios.get('http://localhost:8080/kabupaten.json').then((response) => {
             // console.log(this.selectprov, response)
             // this.kabupaten = response.data
             this.kabops.push({
@@ -205,6 +207,7 @@ export default {
                 value: '0'
             })
             this.selectkab = '0'
+            this.selectdis = '0'
             response.data.forEach(kab => {
                 if(kab.province_id == this.selectprov.id)
                 {
@@ -220,7 +223,7 @@ export default {
      getKecamatan(){
         this.disops = []
         this.form.kabupaten = this.selectkab.name
-        axios.get('https://raw.githubusercontent.com/yusufsyaifudin/wilayah-indonesia/master/data/list_of_area/districts.json')
+        axios.get('http://localhost:8080/kecamatan.json')
         .then((response) => {
             this.disops.push({
                 text: 'Silakan Pilih',
