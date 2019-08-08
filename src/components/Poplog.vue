@@ -52,6 +52,8 @@
 </template>
 
 <script>
+import Axios from 'axios'
+
 export default {
 
   data(){
@@ -71,13 +73,35 @@ export default {
       let password = this.password
       this.$store.dispatch('login', {username, password})
       .then(() => {
-        this.$router.push('/fill')
+        // this.$router.push('/fill')
+        this.ceklengkap()
         this.hideModal()
         })
       .catch(err => console.log(err))
     },
-
-
+    ceklengkap(){
+      const token = 'Bearer '+localStorage.getItem('token')
+      const ndas = {
+        'Authorization' : token,
+        'Content-Type' : 'application/json'
+      }
+      Axios.get(process.env.VUE_APP_ROOT_API + '/profil', { headers: ndas })
+      .then(response =>{
+        // console.log(response.data)
+        // var baru = JSON.parse(response.data)
+        // console.log(JSON.parse(response.data.data))
+        let lengkapi = JSON.parse(response.data.data)
+        if(lengkapi.user.alamat != null)
+        {
+          console.log('isi')
+          this.$router.push('/afterlogin')
+        }else
+        {
+          console.log('kosong isi')
+          this.$router.push('/fill')
+        }
+      })
+    },
     showModal() {
       this.$refs["my-modal"].show();
     },
