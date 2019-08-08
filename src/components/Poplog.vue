@@ -1,8 +1,8 @@
 <template>
   <div>
-    <b-button id="show-btn" variant="link" @click="showModal" href="#">
-      <div style="color: black">Login</div>
-    </b-button>
+    <!-- <b-button id="show-btn" variant="link" @click="showModal" href="#"> -->
+      <b-link style="color: black" @click="showModal">Login</b-link>
+    <!-- </b-button> -->
     <div class="asd">
       <b-modal
         ref="my-modal"
@@ -23,22 +23,25 @@
         <!-- <div class="modal-content"> -->
         <!-- <div class="modal-backdrop"> -->
         <h1>Masuk</h1>
+        <form ref="form" variant="dark" @submit.prevent="login">
         <div class="d-block">
-          <form ref="form" variant="dark" @submit.stop.prevent="handleSubmit">
             <label>
               <input type="text" id="username" v-model="username" required />
               <div class="label-text">Username</div>
             </label>
             <br />
             <label>
-              <input type="password" id="password" v-model="massage" required />
+              <input type="password" id="password" v-model="password" required />
               <div class="label-text">Password</div>
             </label>
-          </form>
         </div>
         <div class="text-center">
-          <button block @click="hideModal">Login</button>
+           <b-button type="submit" variant="info">
+            <b-spinner  v-if="status=='loading'" small ></b-spinner>
+                Login
+            </b-button>
         </div>
+        </form>
         <br />
         <!-- </div> -->
         <!-- </div> -->
@@ -49,50 +52,44 @@
 </template>
 
 <script>
-import Axios from 'axios'
-
 export default {
-  methods: {
 
+  data(){
+    return{
+      username:'',
+      password:''
+    }
+  },
+  computed:{
+    status(){
+      return this.$store.getters.authStatus;
+    }
+  },
+  methods: {
     login(){
       let username = this.username
       let password = this.password
       this.$store.dispatch('login', {username, password})
       .then(() => {
-        // this.$router.push('/fill')
-        this.ceklengkap()
+        this.$router.push('/fill')
         this.hideModal()
         })
       .catch(err => console.log(err))
     },
-    ceklengkap(){
-      const token = 'Bearer '+localStorage.getItem('token')
-      const ndas = {
-        'Authorization' : token,
-        'Content-Type' : 'application/json'
-      }
-      Axios.get(process.env.VUE_APP_ROOT_API + '/profil', { headers: ndas })
-      .then(response =>{
-        // console.log(response.data)
-        // var baru = JSON.parse(response.data)
-        // console.log(JSON.parse(response.data.data))
-        let lengkapi = JSON.parse(response.data.data)
-        if(lengkapi.user.alamat != null)
-        {
-          console.log('isi')
-          this.$router.push('/afterlogin')
-        }else
-        {
-          console.log('kosong isi')
-          this.$router.push('/fill')
-        }
-      })
-    },
+
+
     showModal() {
       this.$refs["my-modal"].show();
     },
     hideModal() {
       this.$refs["my-modal"].hide();
+
+    },
+    test(){
+      this.$refs.Spinner.show();
+      setTimeout(function () {
+        this.$refs.Spinner.hide();
+      }.bind(this), 5000);
     },
     toggleModal() {
       // We pass the ID of the button that we want to return focus to
@@ -155,7 +152,7 @@ label input {
   background-color: transparent;
   border: 0;
   border-bottom: 2px solid #4a4a4a;
-  color: rgb(0, 0, 0);
+  color: black;
   font-size: 26px;
   letter-spacing: -1px;
   outline: 0;
@@ -184,7 +181,7 @@ label input:valid + .label-text {
   transform: translateY(-74px);
 }
 
-button {
+/*button {
   background-color: #333333;
   border: 2px solid white;
   border-radius: 27px;
@@ -201,7 +198,7 @@ button:focus {
   background-color: white;
   color: #333333;
   outline: 0;
-}
+}*/
 p {
   color: white;
 }

@@ -94,7 +94,7 @@ export default {
           { value: 'enterprise', text: 'Enterprise'}
           ],
         data_kelas:{
-            id:null,
+            id:'',
             kode_kelas:'',
             id_materi:null,
             jam_pilihan:'',
