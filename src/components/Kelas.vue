@@ -24,25 +24,39 @@
                               style="text-center"
                         >
                       <b-form @submit.prevent="setKelas">
-                        <b-form-group label="Nama Materi">
-                          <b-form-select id="namamateri" :options="namamateriops" v-model="kelas.namamateri">
+                        <b-form-group label="Id Materi">
+                          <b-form-select id="namamateri" :options="namamateriops" v-model="data_kelas.id_materi">
                              </b-form-select>
                         </b-form-group>
 
                         <b-form-group label="Jam Pilihan">
-                             <b-form-input type="time" id="jam_pilihan" v-model='kelas.jam_pilihan'></b-form-input>
+                             <b-form-input type="time" id="jam_pilihan" v-model='data_kelas.jam_pilihan'></b-form-input>
                         </b-form-group>
 
                         <b-form-group label="Tangal Mulai">
-                          <b-form-input type="date" id="tgl_mulai" v-model='kelas.tgl_mulai'></b-form-input>
+                          <b-form-input type="date" id="tgl_mulai" v-model='data_kelas.tgl_mulai'></b-form-input>
                         </b-form-group>
 
                         <b-form-group label="Target Peserta">
-                          <b-form-input id="target" type="number" min="0" v-model="kelas.target_peserta"></b-form-input>
+                          <b-form-input id="target" type="number" min="0" v-model="data_kelas.target_peserta"></b-form-input>
                         </b-form-group>
+
+                        <b-form-group label="Jumlah Pertemuan">
+                          <b-form-input id="jumlah_pertemuan" type="number" min="0" v-model="data_kelas.jumlah_pertemuan"></b-form-input>
+                        </b-form-group>
+
+                        <b-form-group label="Biaya">
+                          <b-form-input id="biaya" type="number" min="0" v-model="data_kelas.biaya"></b-form-input>
+                        </b-form-group>
+
+                        <b-form-group label="Jenis Kelas">
+                            <b-form-select id="status" type="text" :options="jkop" v-model="data_kelas.jenis_kelas"></b-form-select>  
+                        </b-form-group>
+
                         <b-form-group label="Status">
-                          <b-form-select id="status" type="text" :options="status" v-model="kelas.status"></b-form-select>
+                          <b-form-select id="status" type="text" :options="statusop" v-model="data_kelas.status"></b-form-select>
                         </b-form-group>
+
                         <div class="text-center">
                           <b-button type="submit" size="sm" variant="primary">Simpan</b-button>&nbsp;
                           <b-button to="/admin/kelas" size="sm" variant="danger">Kembali</b-button>
@@ -50,7 +64,7 @@
                       </b-form>
                         </b-modal>
                     </div>
-                <b-table striped hover :items="items" :fields="fields">
+                <b-table striped hover :items="kelas" :fields="fields">
                     <template slot="Action">
                         <b-button size="sm" variant="warning">Edit</b-button>&nbsp;
                         <b-button size="sm" variant="danger">Hapus</b-button>
@@ -68,16 +82,31 @@ export default {
     data() {
       return {
         fields: ['kode', 'nama_materi', 'jam_pilihan', 'tanggal_mulai', 'target_peserta','status', 'Action'],
-        items: [],
-        status:['Aktif','Pending'],
-        kelas:{
-            namamateri:null,
+        statusop:[
+            {value: null, text: 'Silakan Pilih', disabled: true},
+            {value: 'aktif', text: 'Aktif'},
+            {value: 'pending', text: 'Pending'},
+                ],
+        jkop:[
+          { value: null, text: 'Silakan Pilih' ,  disabled: true},
+          { value: 'reguler', text: 'Reguler' },
+          { value: 'private', text: 'Private' },
+          { value: 'enterprise', text: 'Enterprise'}
+          ],
+        data_kelas:{
+            id:null,
+            kode_kelas:'',
+            id_materi:null,
             jam_pilihan:'',
             tgl_mulai:'',
             target_peserta :'',
-            status:''
+            jenis_kelas:null,
+            biaya:'',
+            jumlah_pertemuan:'',
+            status:null
         },
-        namamateriops:[{'text': 'Silakan Pilih', 'value':null}]
+        namamateriops:[{'text': 'Silakan Pilih', 'value':null ,  disabled: true}],
+        kelas:[]
       }
     },
     methods:{
@@ -103,29 +132,90 @@ export default {
       })
     },
     setKelas(){
-
         let isi = {
-          'namamateri' : this.kelas.namamateri,
-          'jam_pilihan' : this.kelas.jam_pilihan,
-          'tgl_mulai' : this.kelas.tgl_mulai,
-          'target_peserta' :  this.kelas.target_peserta,
-          'status' : this.kelas.status
+          'id_materi' : this.data_kelas.id_materi,
+          'kode_kelas' : this.data_kelas.kode_kelas,
+          'jam_pilihan' : this.data_kelas.jam_pilihan,
+          'tgl_mulai' : this.data_kelas.tgl_mulai,
+          'target_peserta' :  this.data_kelas.target_peserta,
+          'jenis_kelas' : this.data_kelas.jenis_kelas,
+          'biaya' : this.data_kelas.biaya,
+          'jumlah_pertemuan' : this.data_kelas.jumlah_pertemuan,
+          'status' : this.data_kelas.status,
+          'kode_kelas' : this.data_kelas.id_materi +'.'+ this.data_kelas.jam_pilihan + '.' + this.data_kelas.tgl_mulai
         };
-        // const isi = this.kelas;
-        axios.post('http://192.168.43.117:3000/kelas', isi);
-            this.$refs["my-modal"].hide();
-            this.kelas.namamateri='';
-            this.kelas.jam_pilihan ='';
-            this.kelas.tgl_mulai='';
-            this.kelas.target_peserta='';
-            this.kelas.status='';
-            console.log(this.kelas, isi)
+        console.log(isi)
+        const token = 'Bearer '+localStorage.getItem('token')
+        const ndas = {
+            'Authorization' : token,
+            'Content-Type' : 'application/json'
+        }
+         if(this.kelas.id != '')
+          {
+            axios.post(process.env.VUE_APP_ROOT_API+'/kelas/'+this.kelas.id, this.kelas, { headers: ndas })
+            .then((response) => {
+              // console.log(response, token)
+              this.getKelas()
+            })
+          }else{
+              axios.post(process.env.VUE_APP_ROOT_API+'/kelas', isi, { headers: ndas })
+                .then(({data}) => {
+                console.log(data, token);
+                data.data.forEach(item => {
+                this.kelas.push(item)
+                });
+                this.data_kelas.id='';
+                this.data_kelas.id_materi='';
+                this.data_kelas.kode_kelas='';
+                this.data_kelas.jam_pilihan ='';
+                this.data_kelas.tgl_mulai='';
+                this.data_kelas.target_peserta='';
+                this.data_kelas.jenis_kelas='';
+                this.data_kelas.biaya='';
+                this.data_kelas.jumlah_pertemuan='';
+                this.data_kelas.status='';
+            });
+                this.$refs["my-modal"].hide();
+          }
+      },
+      getKelas(){
+        axios.get('http://localhost:8081/kelas')
+        .then((res)=> {
+            console.log(res)
+            this.kelas = res.data
+
+        })
+      },
+      editKelas(kelas){
+            this.data_kelas.id = kelas.item.id;
+            this.data_kelas.id_materi = kelas.item.id_materi;
+            this.data_kelas.kode_kelas = kelas.item.kode_kelas;
+            this.data_kelas.jam_pilihan = kelas.item.jam_pilihan;
+            this.data_kelas.tgl_mulai = kelas.item.tgl_mulai;
+            this.data_kelas.target_peserta =kelas.item.target_peserta;
+            this.data_kelas.jenis_kelas =kelas.item.jenis_kelas;
+            this.data_kelas.biaya =kelas.item.biaya;
+            this.data_kelas.jumlah_pertemuan =kelas.item.jumlah_pertemuan;
+            this.data_kelas.status = kelas.item.status;
+          
+          this.$refs["my-modal"].show();
+      },
+      delKelas(index){
+            const token = 'Bearer '+localStorage.getItem('token')
+            const ndas = {
+                'Authorization' : token,
+                'Content-Type' : 'application/json'
+            }
+          const id = this.kelas[index].id
+          axios.delete(process.env.VUE_APP_ROOT_API+'/kelas/'+id, { headers: ndas })
+        
       },    
 
     },
 
     mounted(){
        this.getMateri();  
+       this.getKelas();
     },
   
 }
