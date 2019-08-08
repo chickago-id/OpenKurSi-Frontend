@@ -1,8 +1,7 @@
 <template>
     
         <b-container>
-            <b-card
-            >
+            <b-card>
                 <div slot="header">
                     <h3>Kelas</h3>
                 </div>
@@ -24,7 +23,7 @@
                               style="text-center"
                         >
                       <b-form @submit.prevent="setKelas">
-                        <b-form-group label="Id Materi">
+                        <b-form-group label="Nama Materi">
                           <b-form-select id="namamateri" :options="namamateriops" v-model="data_kelas.id_materi">
                              </b-form-select>
                         </b-form-group>
@@ -81,7 +80,48 @@ export default {
     
     data() {
       return {
-        fields: ['kode', 'nama_materi', 'jam_pilihan', 'tanggal_mulai', 'target_peserta','status', 'Action'],
+        fields: {
+          kode_kelas:{
+            label:'Kode',
+            sortable : true
+          },
+          nama_materi:{
+            label:'Nama Materi',
+            sortable : true
+          },
+          jam_pilihan:{
+            label:'Jam Pilihan',
+            sortable : true
+          },
+          tanggal_mulai:{
+            label:'Tanggal Mulai',
+            sortable : true
+          },
+          target_peserta:{
+            label:'Target Peserta',
+            sortable : true
+          },
+          jenis_kelas:{
+            label:'Jenis Kelas',
+            sortable : true
+          },
+          biaya:{
+            label:'Biaya',
+            sortable : true
+          },
+          jumlah_pertemuan:{
+            label:'Jumlah Pertemuan',
+            sortable : true
+          },
+          status:{
+            label : 'Status',
+            sortable : true
+          },
+
+         
+          Action:{
+          }
+        },
         statusop:[
             {value: null, text: 'Silakan Pilih', disabled: true},
             {value: 'aktif', text: 'Aktif'},
@@ -182,7 +222,7 @@ export default {
         axios.get('http://localhost:8081/kelas')
         .then((res)=> {
             console.log(res)
-            this.kelas = res.data
+            this.kelas = res.data.data
 
         })
       },
