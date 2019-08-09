@@ -94,10 +94,13 @@ export default {
         if(lengkapi.alamat != null)
         {
           console.log('isi')
+          // window.location = '/'
           this.$router.push('/afterlogin')
         }else
         {
           console.log('kosong isi')
+          // window.location = '/'
+          // window.location = this.$router.push('/fill')
           this.$router.push('/fill')
         }
       })
