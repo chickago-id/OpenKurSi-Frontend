@@ -1,9 +1,9 @@
 <template>
   <div>
-    <status />
+    <status :msg="childData"/>
     <br />
     <!-- <addkelas/> -->
-    <daftarkelas />
+    <daftarkelas @inputData="updateMessage"/>
   </div>
 </template>
 
@@ -17,7 +17,7 @@ export default {
     status,
     // addkelas
     daftarkelas
-  }
+  },
 };
 </script>
 

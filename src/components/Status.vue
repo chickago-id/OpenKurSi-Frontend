@@ -1,19 +1,18 @@
 <template>
-    <div>
-        <b-container>
+  <div>
+    <b-container>
             <b-card
-                title="Status"
-            >
+                title="Status">
                 <b-table striped hover :items="items" :fields="fields">
                     <template slot="Action" >
-                        <b-button size="sm" variant="warning">Edit</b-button>&nbsp;
                         <b-button size="sm" variant="danger">Hapus</b-button>
                     </template>
                 </b-table>
             </b-card>
-        </b-container>
-    </div>
+    </b-container>
+  </div>
 </template>
+
 
 <script>
   export default {
