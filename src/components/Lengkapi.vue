@@ -30,74 +30,85 @@
                     <tr valign="top">
                         <td>
                             <b-form-group label="Tempat Lahir">
-                                <b-form-input type="text" id="tempat_lahir" v-model="form.tempat_lahir"></b-form-input>
-                                
+                                <b-form-input type="text" id="tempat_lahir" v-model="form.tempat_lahir" required></b-form-input>
                             </b-form-group>
 
-                            <b-form-group label="Tanggal Lahir">
-                                <b-form-input type="date" id="tanggal_lahir" v-model="form.tanggal_lahir"></b-form-input>
-                            </b-form-group>
 
-                            <b-form-group label="Jenis Kelamin" style="margin-bottom: 30px">
-                                <b-form-radio-group id="gender">
-                                    <b-form-radio v-model="form.jenis_kelamin" value="laki-laki">Laki - laki</b-form-radio>
-                                    <b-form-radio v-model="form.jenis_kelamin" value="perempuan">Perempuan</b-form-radio>
-                                </b-form-radio-group>
-                            </b-form-group>
+              <b-form-group label="Tanggal Lahir">
+                <b-form-input type="date" id="tanggal_lahir" v-model="form.tanggal_lahir" required></b-form-input>
+              </b-form-group>
 
-                            <b-form-group label="Agama">
-                                <b-form-input type="text" id="agama" v-model="form.agama"></b-form-input>
-                            </b-form-group>
+              <b-form-group label="Jenis Kelamin" style="margin-bottom: 30px">
+                <b-form-radio-group id="gender" required>
+                  <b-form-radio v-model="form.jenis_kelamin" value="laki-laki">Laki - laki</b-form-radio>
+                  <b-form-radio v-model="form.jenis_kelamin" value="perempuan">Perempuan</b-form-radio>
+                </b-form-radio-group>
+              </b-form-group>
 
-                            <b-form-group label="Status">
-                                <b-form-input type="text" id="status" v-model="form.status_saat_ini"></b-form-input>
-                            </b-form-group>
+              <b-form-group id="input-group-3" label="Agama" label-for="input-3">
+                <b-form-select
+                    id="input-3"
+                    v-model="form.agama"
+                    :options="agama"
+                    required>
+                </b-form-select>
+                </b-form-group>
+              <b-form-group id="status" label="Status" label-for="status">
+                <b-form-select
+                    id="status"
+                    v-model="form.status_saat_ini"
+                    :options="status"
+                    required>
+                </b-form-select>
+              </b-form-group>
 
-                            <b-form-group label="Pekerjaan">
-                                <b-form-input type="text" id="pekerjaan" v-model="form.pekerjaan"></b-form-input>
-                            </b-form-group>
+              <b-form-group label="Pekerjaan">
+                <b-form-input type="text" id="pekerjaan" v-model="form.pekerjaan"></b-form-input>
+              </b-form-group>
 
-                            <b-form-group label="Nama Orang Tua">
-                                <b-form-input type="text" id="orang_tua" v-model="form.nama_orangtua"></b-form-input>
-                            </b-form-group>
+              <b-form-group label="Nama Orang Tua">
+                <b-form-input type="text" id="orang_tua" v-model="form.nama_orangtua" required></b-form-input>
+              </b-form-group>
 
-                            <b-form-group label="No Telp Orang Tua">
-                                <b-form-input type="text" id="no_telp_ortu" v-model="form.telepon"></b-form-input>
-                            </b-form-group>
-                        </td>
-                        <td style="width: 20px">
+              <b-form-group label="No Telp Orang Tua">
+                <b-form-input type="text" id="no_telp_ortu" v-model="form.telepon" required></b-form-input>
+              </b-form-group>
+            </td>
+            <td style="width: 20px"></td>
+            <td>
+              <b-form-group label="Asal Sekolah">
+                <b-form-input type="text" id="asal_sekolah" v-model="form.asal_sekolah_kampus" required></b-form-input>
+              </b-form-group>
 
-                        </td>
-                        <td>
-                            <b-form-group label="Asal Sekolah">
-                                <b-form-input type="text" id="asal_sekolah" v-model="form.asal_sekolah_kampus"></b-form-input>
-                            </b-form-group>
+              <b-form-group label="Alamat">
+                <b-form-input type="text" id="alamat" v-model="form.alamat" required></b-form-input>
+              </b-form-group>
 
-                            <b-form-group label="Alamat">
-                                <b-form-input type="text" id="alamat" v-model="form.alamat"></b-form-input>
-                            </b-form-group>
-                            
-                            <b-form-group label="Provinsi">
-                                <!-- <b-form-input type="text" id="provinsi" v-model="form.provinsi"></b-form-input> -->
-                                 <b-form-select :options="provinsiops" v-model="selectprov" @change="getKabupaten()"></b-form-select>
-                            </b-form-group>
+              <b-form-group label="Provinsi">
+                <!-- <b-form-input type="text" id="provinsi" v-model="form.provinsi"></b-form-input> -->
+                <b-form-select :options="provinsiops" v-model="selectprov" @change="getKabupaten()" required></b-form-select>
+              </b-form-group>
 
-                            <b-form-group label="Kabupaten">
-                                <!-- <b-form-input type="text" id="kabupaten" v-model="form.kabupaten"></b-form-input> -->
-                                <b-form-select :options="kabops" v-model="selectkab" @change="getKecamatan()"></b-form-select>
-                            </b-form-group>
+              <b-form-group label="Kabupaten">
+                <!-- <b-form-input type="text" id="kabupaten" v-model="form.kabupaten"></b-form-input> -->
+                <b-form-select :options="kabops" v-model="selectkab" @change="getKecamatan()" required></b-form-select>
+              </b-form-group>
 
-                            <b-form-group label="Kecamatan">
-                                <!-- <b-form-input type="text" id="kecamatan" v-model="form.kecamatan"></b-form-input> -->
-                                <b-form-select :options="disops" v-model="selectdis" @change="setDistrict()"></b-form-select>
-                            </b-form-group>
+              <b-form-group label="Kecamatan">
+                <!-- <b-form-input type="text" id="kecamatan" v-model="form.kecamatan"></b-form-input> -->
+                <b-form-select :options="disops" v-model="selectdis" @change="setDistrict()" required></b-form-select>
+              </b-form-group>
+
+              <b-form-group label="Kode Pos">
+                <b-form-input type="text" id="kode_pos" v-model="form.kode_pos"></b-form-input>
+              </b-form-group>
 
                             <b-form-group label="Kode Pos">
                                 <b-form-input type="text" id="kode_pos" v-model="form.kode_pos"></b-form-input>
                             </b-form-group>
 
                             <b-form-group label="Instagram">
-                                <b-form-input type="text" id="instagram" v-model="form.akun_ig"></b-form-input>
+                                <b-form-input type="text" id="instagram" v-model="form.akun_ig" required></b-form-input>
                             </b-form-group>
                              <b-form-group label="facebook">
                                 <b-form-input type="text" id="facebook" v-model="form.facebook"></b-form-input>
@@ -120,8 +131,8 @@
 </template>
 
 <script>
-import axios from 'axios';
-import Loc from 'administratif-indonesia';
+import axios from 'axios'
+import Loc from 'administratif-indonesia'
 export default {
     data(){
         return{
@@ -148,6 +159,13 @@ export default {
                 facebook:'',
             },
             biodata: '',
+            agama: [{ text: 'Silahkan Pilih', value: '' }, 'Islam', 'Katolik', 'Kristen', 'Hindu', 'Budha'],
+            status: [
+                { text: 'Silahkan Pilih', value: '' },
+                'Masih Sekolah/Kuliah',
+                'Lulus Kuliah',
+                'Kerja'
+            ],
             selectprov: '',
             selectkab: '',
             selectdis: '',
@@ -163,12 +181,13 @@ export default {
             notif: '',
             dismissSecs: 3,
             dismissCountDown: 0,
-        }
-    },
-    mounted(){
-        this.getProvinsi()
-        this.ceklengkap()
-    },
+
+    };
+  },
+  mounted() {
+    this.getProvinsi();
+    this.ceklengkap();
+  },
     methods:{
         checkform: function(e){
             if (this.tempat_lahir == '') {
@@ -244,7 +263,7 @@ export default {
             console.log(e)
           }
      },
-     async getProvinsi(){
+     getProvinsi(){
         axios.get('http://localhost:8080/provinsi.json')
         .then((response) => {
             // this.provinsiops = response.data
@@ -259,13 +278,13 @@ export default {
             });
         })
      },
-     getKabupaten(){
-        this.kabops = []
-        this.disops = []
-        this.form.provinsi = this.selectprov.name
-        axios.get('http://localhost:8080/kabupaten.json').then((response) => {
-            // console.log(this.selectprov, response)
-            // this.kabupaten = response.data
+    getKabupaten() {
+      this.kabops = []
+      this.disops = []
+      this.form.provinsi = this.selectprov.name
+      axios.get('http://localhost:8080/kabupaten.json').then((response) => {
+        // console.log(this.selectprov, response)
+        // this.kabupaten = response.data
             this.kabops.push({
                 text: 'Silakan Pilih',
                 value: ''
@@ -285,15 +304,15 @@ export default {
                     })
                 }
             })
-        })
-        console.log(this.form.provinsi)
-     },
-     getKecamatan(){
-        this.disops = []
-        this.form.kota_kabupaten = this.selectkab.name
-        axios.get('http://localhost:8080/kecamatan.json')
-        .then((response) => {
-            this.disops.push({
+          })
+      console.log(this.form.provinsi)
+    },
+    getKecamatan() {
+      this.disops = []
+      this.form.kota_kabupaten = this.selectkab.name
+      axios.get('http://localhost:8080/kecamatan.json').then(response => {
+        this.disops.push({
+
                 text: 'Silakan Pilih',
                 value: ''
             })
@@ -321,6 +340,6 @@ export default {
             this.dismissCountDown = this.dismissSecs
         }
     }
-}
+  }
 </script>
 
