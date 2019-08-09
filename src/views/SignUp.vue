@@ -3,7 +3,7 @@
   <div>
     <b-container style="text-center">
     <!-- <b-alert class="tengah" v-model="showDismissibleAlert" variant="danger" dismissible><p v-html="notif"></p></b-alert> -->
-    <!-- <b-alert class="tengah" v-model="showAlertBerhasil" variant="success" dismissible><p>Pendaftaran Berhasil</p></b-alert> -->
+    <b-alert class="tengah" v-model="showAlertBerhasil" variant="success" dismissible><p>Pendaftaran Berhasil, Silakan Login</p></b-alert>
       <b-alert
         class="tengah"
         :show="dismissCountDown"

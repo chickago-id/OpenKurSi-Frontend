@@ -103,10 +103,6 @@
                 <b-form-input type="text" id="kode_pos" v-model="form.kode_pos"></b-form-input>
               </b-form-group>
 
-                            <b-form-group label="Kode Pos">
-                                <b-form-input type="text" id="kode_pos" v-model="form.kode_pos"></b-form-input>
-                            </b-form-group>
-
                             <b-form-group label="Instagram">
                                 <b-form-input type="text" id="instagram" v-model="form.akun_ig" required></b-form-input>
                             </b-form-group>

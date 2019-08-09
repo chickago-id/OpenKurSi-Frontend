@@ -90,7 +90,8 @@ export default {
         // var baru = JSON.parse(response.data)
         // console.log(JSON.parse(response.data.data))
         let lengkapi = JSON.parse(response.data.data)
-        if(lengkapi.user.alamat != null)
+        console.log(lengkapi)
+        if(lengkapi.alamat != null)
         {
           console.log('isi')
           this.$router.push('/afterlogin')
