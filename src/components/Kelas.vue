@@ -1,5 +1,4 @@
 <template>
-    
         <b-container>
             <b-card>
                 <div slot="header">
@@ -64,9 +63,38 @@
                         </b-modal>
                     </div>
                 <b-table striped hover :items="kelas" :fields="fields">
-                    <template slot="Action">
-                        <b-button size="sm" variant="warning">Edit</b-button>&nbsp;
-                        <b-button size="sm" variant="danger">Hapus</b-button>
+                    <template slot="show_details" slot-scope="row">
+                        <b-button size="sm" @click="row.toggleDetails" class="mr-2">
+                          {{ row.detailsShowing ? 'Hide' : 'Show'}} Details
+                        </b-button>
+                     </template>
+                    <template slot="row-details" slot-scope="row">
+                        <b-card>
+                          <b-row class="mb-2">
+                            <b-col sm="3" class="text-sm-right"><b>Kode Kelas :</b></b-col>
+                            <b-col>{{ row.item.kode_kelas }}</b-col>
+                          </b-row>
+  
+                          <b-row class="mb-2">
+                            <b-col sm="3" class="text-sm-right"><b>Jam Pilihan :</b></b-col>
+                            <b-col>{{ row.item.jam_pilihan }}</b-col>
+                          </b-row>
+                          <b-row class="mb-2">
+                            <b-col sm="3" class="text-sm-right"><b>Biaya :</b></b-col>
+                            <b-col>{{ row.item.biaya }}</b-col>
+                          </b-row>
+                          <b-row class="mb-2">
+                            <b-col sm="3" class="text-sm-right"><b>Jumlah Pertemuan :</b></b-col>
+                            <b-col>{{ row.item.jumlah_pertemuan }}</b-col>
+                          </b-row>
+
+                          <b-button size="sm" @click="row.toggleDetails">Hide Details</b-button>
+                        </b-card>
+                      </template>
+
+                    <template slot="Action" slot-scope="kelas">
+                        <b-button size="sm" variant="warning" @click="editKelas(kelas)">Edit</b-button>&nbsp;
+                        <b-button size="sm" variant="danger" @click="delKelas(kelas.index)">Hapus</b-button>
                     </template>
                 </b-table>
             </b-card>
@@ -81,16 +109,8 @@ export default {
     data() {
       return {
         fields: {
-          kode_kelas:{
-            label:'Kode',
-            sortable : true
-          },
-          nama_materi:{
+          'materi.nama_materi':{
             label:'Nama Materi',
-            sortable : true
-          },
-          jam_pilihan:{
-            label:'Jam Pilihan',
             sortable : true
           },
           tanggal_mulai:{
@@ -101,24 +121,18 @@ export default {
             label:'Target Peserta',
             sortable : true
           },
-          jenis_kelas:{
-            label:'Jenis Kelas',
-            sortable : true
-          },
-          biaya:{
-            label:'Biaya',
-            sortable : true
-          },
-          jumlah_pertemuan:{
-            label:'Jumlah Pertemuan',
-            sortable : true
-          },
+          // jenis_kelas:{
+          //   label:'Jenis Kelas',
+          //   sortable : true
+          // },
           status:{
-            label : 'Status',
-            sortable : true
+            lable:'Status'
           },
-
+          show_details:{
+            label:'Show Details',
+          },
          
+          
           Action:{
           }
         },
@@ -129,9 +143,9 @@ export default {
                 ],
         jkop:[
           { value: null, text: 'Silakan Pilih' ,  disabled: true},
-          { value: 'reguler', text: 'Reguler' },
+          { value: 'profesi', text: 'Profesi' },
           { value: 'private', text: 'Private' },
-          { value: 'enterprise', text: 'Enterprise'}
+          { value: 'intensif', text: 'Intensif'}
           ],
         data_kelas:{
             id:'',
@@ -169,11 +183,13 @@ export default {
                 'value' : materi.id
             })
         })
+        console.log(response)
       })
+
     },
     setKelas(){
         let isi = {
-          'id_materi' : this.data_kelas.id_materi,
+          'id_materi' : this.data_kelas.    id_materi,
           'kode_kelas' : this.data_kelas.kode_kelas,
           'jam_pilihan' : this.data_kelas.jam_pilihan,
           'tanggal_mulai' : this.data_kelas.tanggal_mulai,
@@ -192,10 +208,12 @@ export default {
         }
          if(this.data_kelas.id != '')
           {
-            axios.post(process.env.VUE_APP_ROOT_API+'/kelas/'+this.data_kelas.id, this.isi, { headers: ndas })
+            console.log('masuk atas')
+            axios.post(process.env.VUE_APP_ROOT_API+'/kelas/'+this.data_kelas.id, this.data_kelas, { headers: ndas })
             .then((response) => {
               // console.log(response, token)
               this.getKelas()
+              this.$refs["my-modal"].hide();
             })
           }else{
               axios.post(process.env.VUE_APP_ROOT_API+'/kelas', isi, { headers: ndas })
@@ -219,7 +237,7 @@ export default {
           }
       },
       getKelas(){
-        axios.get('http://localhost:8081/kelas')
+        axios.get(process.env.VUE_APP_ROOT_API+'/kelas')
         .then((res)=> {
             console.log(res)
             this.kelas = res.data.data
@@ -248,7 +266,10 @@ export default {
             }
           const id = this.kelas[index].id
           axios.delete(process.env.VUE_APP_ROOT_API+'/kelas/'+id, { headers: ndas })
-        
+            .then(res =>{
+            console.log(res)
+            this.kelas.splice(index, 1);
+      })
       },    
 
     },
