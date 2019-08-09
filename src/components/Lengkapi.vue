@@ -20,8 +20,8 @@
 
                             <b-form-group label="Jenis Kelamin" style="margin-bottom: 30px">
                                 <b-form-radio-group id="gender">
-                                    <b-form-radio v-model="form.gender" value="laki-laki">Laki - laki</b-form-radio>
-                                    <b-form-radio v-model="form.gender" value="perempuan">Perempuan</b-form-radio>
+                                    <b-form-radio v-model="form.jenis_kelamin" value="laki-laki">Laki - laki</b-form-radio>
+                                    <b-form-radio v-model="form.jenis_kelamin" value="perempuan">Perempuan</b-form-radio>
                                 </b-form-radio-group>
                             </b-form-group>
 
@@ -30,7 +30,7 @@
                             </b-form-group>
 
                             <b-form-group label="Status">
-                                <b-form-input type="text" id="status" v-model="form.status"></b-form-input>
+                                <b-form-input type="text" id="status" v-model="form.status_saat_ini"></b-form-input>
                             </b-form-group>
 
                             <b-form-group label="Pekerjaan">
@@ -38,11 +38,11 @@
                             </b-form-group>
 
                             <b-form-group label="Nama Orang Tua">
-                                <b-form-input type="text" id="orang_tua" v-model="form.orang_tua"></b-form-input>
+                                <b-form-input type="text" id="orang_tua" v-model="form.nama_orangtua"></b-form-input>
                             </b-form-group>
 
                             <b-form-group label="No Telp Orang Tua">
-                                <b-form-input type="text" id="no_telp_ortu" v-model="form.no_telp_ortu"></b-form-input>
+                                <b-form-input type="text" id="no_telp_ortu" v-model="form.telepon"></b-form-input>
                             </b-form-group>
                         </td>
                         <td style="width: 20px">
@@ -50,7 +50,7 @@
                         </td>
                         <td>
                             <b-form-group label="Asal Sekolah">
-                                <b-form-input type="text" id="asal_sekolah" v-model="form.asal_sekolah"></b-form-input>
+                                <b-form-input type="text" id="asal_sekolah" v-model="form.asal_sekolah_kampus"></b-form-input>
                             </b-form-group>
 
                             <b-form-group label="Alamat">
@@ -77,7 +77,7 @@
                             </b-form-group>
 
                             <b-form-group label="Instagram">
-                                <b-form-input type="text" id="instagram" v-model="form.instagram"></b-form-input>
+                                <b-form-input type="text" id="instagram" v-model="form.akun_ig"></b-form-input>
                             </b-form-group>
                              <b-form-group label="facebook">
                                 <b-form-input type="text" id="facebook" v-model="form.facebook"></b-form-input>
@@ -86,7 +86,7 @@
                     </tr>
                     <tr>    
                         <td colspan="3" align="center">
-                            <b-button size="sm" variant="primary" to="/afterlogin" type="submit">Simpan</b-button>&nbsp;
+                            <b-button size="sm" variant="primary" type="submit">Simpan</b-button>&nbsp;
                             <b-button size="sm" variant="danger">Batal</b-button>
                         </td>
                     </tr>
@@ -103,23 +103,26 @@ export default {
     data(){
         return{
             form:{
+                nama_lengkap: '',
                 tempat_lahir: '',
                 tanggal_lahir: '',
-                gender: '',
+                jenis_kelamin: '',
                 agama: '',
-                status: '',
+                status_saat_ini: '',
                 pekerjaan: '',
-                orang_tua: '',
-                no_telp_ortu: '',
-                asal_sekolah: '',
+                nama_orangtua: '',
+                telepon: '',
+                telepon_orangtua:'',
+                asal_sekolah_kampus: '',
                 alamat: '',
                 kecamatan: '',
-                kabupaten: '',
+                kota_kabupaten: '',
                 provinsi: '',
                 kode_pos: '',
-                instagram: '',
+                akun_ig: '',
                 facebook:'',
             },
+            biodata: '',
             selectprov: '0',
             selectkab: '0',
             selectdis: '0',
@@ -130,10 +133,13 @@ export default {
             disops:[{'text': 'Silakan Pilih', 'value':'0'}],
             kabupaten:[],
             kecamatan:[],
+
+            loading: true,
         }
     },
     mounted(){
         this.getProvinsi()
+        this.ceklengkap()
     },
     methods:{
         checkform: function(e){
@@ -144,27 +150,50 @@ export default {
             }
             e.preventDefault()
         },
-        async save(event){
+        ceklengkap(){
+            const token = 'Bearer '+localStorage.getItem('token')
+            const ndas = {
+                'Authorization' : token,
+                'Content-Type' : 'application/json'
+            }
+            axios.get(process.env.VUE_APP_ROOT_API + '/profil', { headers: ndas })
+            .then(response =>{
+                // console.log(response.data)
+                // var baru = JSON.parse(response.data)
+                // console.log(JSON.parse(response.data.data))
+                let lengkapi = JSON.parse(response.data.data)
+                console.log(lengkapi.nama_lengkap)
+                this.nama_lengkap = lengkapi.nama_lengkap
+            })
+        },
+        async save(){
           try{
-            const res = await axios.post('http://localhost:3000/biodata', this.form)
+            const token = 'Bearer '+localStorage.getItem('token')
+            const ndas = {
+                'Authorization' : token,
+                'Content-Type' : 'application/json'
+            }
+            this.telepon_orangtua = this.telepon
+            const res = await axios.post(process.env.VUE_APP_ROOT_API + '/profil', this.form, { headers: ndas })
+                console.log(res)
                 this.biodata = res.data
-                this.tempat_lahir= ''
-                this.tanggal_lahir= ''
-                this.gender= ''
-                this.agama= ''
-                this.status= ''
-                this.pekerjaan= ''
-                this.orang_tua= ''
-                this.no_telp_ortu= ''
-                this.asal_sekolah= ''
-                this.alamat= ''
-                this.kecamatan= ''
-                this.kabupaten= ''
-                this.provinsi= ''
-                this.kode_pos= ''
-                this.instagram= ''
-                this.facebook=''
-                event.target.reset()
+                this.form.tempat_lahir= ''
+                this.form.tanggal_lahir= ''
+                this.form.jenis_kelamin= ''
+                this.form.agama= ''
+                this.form.status_saat_ini= ''
+                this.form.pekerjaan= ''
+                this.form.nama_orangtua= ''
+                this.form.telepon= ''
+                this.form.asal_sekolah_kampus= ''
+                this.form.alamat= ''
+                this.form.kecamatan= ''
+                this.form.kota_kabupaten= ''
+                this.form.provinsi= ''
+                this.form.kode_pos= ''
+                this.form.instagram= ''
+                this.form.facebook=''
+                // event.target.reset()
                 console.log(this.tempat_lahir);
           }catch(e){
             console.log(e)
@@ -222,7 +251,7 @@ export default {
      },
      getKecamatan(){
         this.disops = []
-        this.form.kabupaten = this.selectkab.name
+        this.form.kota_kabupaten = this.selectkab.name
         axios.get('http://localhost:8080/kecamatan.json')
         .then((response) => {
             this.disops.push({
