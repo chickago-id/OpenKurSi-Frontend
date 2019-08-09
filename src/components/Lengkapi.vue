@@ -1,5 +1,25 @@
 <template>
     <b-container>
+        <!-- <b-card> -->
+            <b-alert class="tengah" v-model="showAlertBerhasil" variant="success" dismissible><p>Berhasil disimpan</p></b-alert>
+            <b-alert
+                class="tengah"
+                :show="dismissCountDown"
+                dismissible
+                variant="danger"
+                @dismissed="dismissCountDown=0"
+                @dismiss-count-down="countDownChanged"
+            >
+                <p v-html="notif"></p>
+                <p>This alert will dismiss after {{ dismissCountDown }} seconds...</p>
+                <b-progress
+                variant="warning"
+                :max="dismissSecs"
+                :value="dismissCountDown"
+                height="4px"
+                ></b-progress>
+            </b-alert>
+        <!-- </b-card> -->
         <b-card>
             <h5 slot="header">Lengkapi Data Diri</h5>
             <form @submit.prevent="save">
@@ -86,7 +106,10 @@
                     </tr>
                     <tr>    
                         <td colspan="3" align="center">
-                            <b-button size="sm" variant="primary" type="submit">Simpan</b-button>&nbsp;
+                            <b-button size="sm" variant="primary" type="submit">
+                            <b-spinner  v-if="loading" small ></b-spinner>
+                                Simpan
+                            </b-button>&nbsp;
                             <b-button size="sm" variant="danger">Batal</b-button>
                         </td>
                     </tr>
@@ -103,6 +126,8 @@ export default {
     data(){
         return{
             form:{
+                id: '',
+                id_user: '',
                 nama_lengkap: '',
                 tempat_lahir: '',
                 tanggal_lahir: '',
@@ -123,18 +148,21 @@ export default {
                 facebook:'',
             },
             biodata: '',
-            selectprov: '0',
-            selectkab: '0',
-            selectdis: '0',
+            selectprov: '',
+            selectkab: '',
+            selectdis: '',
             error:[],
             biodata:[],
-            provinsiops:[{'text': 'Silakan Pilih', 'value':'0'}],
-            kabops:[{'text': 'Silakan Pilih', 'value':'0'}],
-            disops:[{'text': 'Silakan Pilih', 'value':'0'}],
+            provinsiops:[{'text': 'Silakan Pilih', 'value':''}],
+            kabops:[{'text': 'Silakan Pilih', 'value':''}],
+            disops:[{'text': 'Silakan Pilih', 'value':''}],
             kabupaten:[],
             kecamatan:[],
-
-            loading: true,
+            showAlertBerhasil: false,
+            loading: false,
+            notif: '',
+            dismissSecs: 3,
+            dismissCountDown: 0,
         }
     },
     mounted(){
@@ -162,50 +190,61 @@ export default {
                 // var baru = JSON.parse(response.data)
                 // console.log(JSON.parse(response.data.data))
                 let lengkapi = JSON.parse(response.data.data)
-                console.log(lengkapi.nama_lengkap)
-                this.nama_lengkap = lengkapi.nama_lengkap
+                console.log(lengkapi)
+                this.form.nama_lengkap = lengkapi.nama_lengkap
+                this.form.id = lengkapi.id
+                this.form.id_user = lengkapi.id_user
             })
         },
-        async save(){
+        save(){
           try{
+            this.loading = true
             const token = 'Bearer '+localStorage.getItem('token')
             const ndas = {
                 'Authorization' : token,
                 'Content-Type' : 'application/json'
             }
-            this.telepon_orangtua = this.telepon
-            const res = await axios.post(process.env.VUE_APP_ROOT_API + '/profil', this.form, { headers: ndas })
+            this.form.telepon_orangtua = this.form.telepon
+            axios.post(process.env.VUE_APP_ROOT_API + '/profil', this.form, { headers: ndas })
+            .then(res => {
                 console.log(res)
-                this.biodata = res.data
-                this.form.tempat_lahir= ''
-                this.form.tanggal_lahir= ''
-                this.form.jenis_kelamin= ''
-                this.form.agama= ''
-                this.form.status_saat_ini= ''
-                this.form.pekerjaan= ''
-                this.form.nama_orangtua= ''
-                this.form.telepon= ''
-                this.form.asal_sekolah_kampus= ''
-                this.form.alamat= ''
-                this.form.kecamatan= ''
-                this.form.kota_kabupaten= ''
-                this.form.provinsi= ''
-                this.form.kode_pos= ''
-                this.form.instagram= ''
-                this.form.facebook=''
+                if(res.data.status == 'ok')
+                {
+                    this.loading = false
+                    this.showAlertBerhasil = true
+                    this.biodata = res.data
+                    this.form.tempat_lahir= ''
+                    this.form.tanggal_lahir= ''
+                    this.form.jenis_kelamin= ''
+                    this.form.agama= ''
+                    this.form.status_saat_ini= ''
+                    this.form.pekerjaan= ''
+                    this.form.nama_orangtua= ''
+                    this.form.telepon= ''
+                    this.form.asal_sekolah_kampus= ''
+                    this.form.alamat= ''
+                    this.form.kecamatan= ''
+                    this.form.kota_kabupaten= ''
+                    this.form.provinsi= ''
+                    this.form.kode_pos= ''
+                    this.form.akun_ig= ''
+                    this.form.facebook=''
+                    this.$router.pull('/afterlogin')
+                }else{
+                    this.showAlertBerhasil = false
+                    this.notif = res.data.message
+                    // this.pesangagal(this.notif)
+                    // this.$bvModal.show('bv-modal-example')
+                    this.showAlert()
+                }
                 // event.target.reset()
-                console.log(this.tempat_lahir);
+                // console.log(this.tempat_lahir);
+            })
           }catch(e){
             console.log(e)
           }
      },
      async getProvinsi(){
-        // const ai = new AdministratifIndonesia(); 
-        // console.log(Loc.all())
-        // const ai = new Loc()
-        // console.log(JSON.stringify(ai.all(), null, '\t'));
-        
-        // axios.get('https://raw.githubusercontent.com/yusufsyaifudin/wilayah-indonesia/master/data/list_of_area/provinces.json')
         axios.get('http://localhost:8080/provinsi.json')
         .then((response) => {
             // this.provinsiops = response.data
@@ -229,14 +268,14 @@ export default {
             // this.kabupaten = response.data
             this.kabops.push({
                 text: 'Silakan Pilih',
-                value: '0'
+                value: ''
             })
             this.disops.push({
                 text: 'Silakan Pilih',
-                value: '0'
+                value: ''
             })
-            this.selectkab = '0'
-            this.selectdis = '0'
+            this.selectkab = ''
+            this.selectdis = ''
             response.data.forEach(kab => {
                 if(kab.province_id == this.selectprov.id)
                 {
@@ -256,9 +295,9 @@ export default {
         .then((response) => {
             this.disops.push({
                 text: 'Silakan Pilih',
-                value: '0'
+                value: ''
             })
-            this.selectdis = '0'
+            this.selectdis = ''
             response.data.forEach(kec => {
                 if(kec.regency_id == this.selectkab.id)
                 {
@@ -274,7 +313,13 @@ export default {
      setDistrict(){
          this.form.kecamatan = this.selectdis.name
          console.log(this.form.kecamatan)
-     }
+     },
+     countDownChanged(dismissCountDown) {
+        this.dismissCountDown = dismissCountDown
+        },
+    showAlert() {
+            this.dismissCountDown = this.dismissSecs
+        }
     }
 }
 </script>
