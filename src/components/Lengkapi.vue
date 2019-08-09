@@ -244,7 +244,7 @@ export default {
                     this.form.kode_pos= ''
                     this.form.akun_ig= ''
                     this.form.facebook=''
-                    this.$router.pull('/afterlogin')
+                    this.$router.push('/afterlogin')
                 }else{
                     this.showAlertBerhasil = false
                     this.notif = res.data.message
