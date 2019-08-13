@@ -116,6 +116,10 @@ let router = new Router({
       path: "/addjadwal",
       name: 'addjadwal',
       component: () => import('./views/Vaddjadwal.vue')
+    },{
+      path: "/absensiswa",
+      name: 'ansensiswa',
+      component: () => import('./views/AbsenSiswa.vue')
     },
   ]
 })

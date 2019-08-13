@@ -1,8 +1,7 @@
 <template>
   <div>
     <b-container>
-            <b-card
-                title="Status">
+            <b-card title="Status">
                 <b-table striped hover :items="items" :fields="fields">
                     <template slot="Action" >
                         <b-button size="sm" variant="danger">Hapus</b-button>
