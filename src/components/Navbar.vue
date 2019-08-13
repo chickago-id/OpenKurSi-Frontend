@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="primary">
-      <b-navbar-brand :to="isLoggedIn?'/afterlogin':'/'" >OpenKursi</b-navbar-brand>
+      <b-navbar-brand :to="isLoggedIn?'/':'/'" >OpenKursi</b-navbar-brand>
            <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav v-if="isLoggedIn && userRole == 'Admin'">
@@ -62,7 +62,7 @@ export default {
   },
   data(){
     return{
-      role: '',
+      roles: '',
     }
   },
   computed:{
@@ -93,11 +93,11 @@ export default {
         axios.get(process.env.VUE_APP_ROOT_API + '/profil', { headers: ndas })
         .then(response =>{
             let lengkapi = JSON.parse(response.data.data)
-            this.role = lengkapi.user.role
-            console.log(lengkapi, this.role)
+            this.roles = lengkapi.user.role
+            console.log(lengkapi, this.roles)
         })
       }else{
-        this.role = ''
+        this.roles = ''
       }
     }
   }
