@@ -1,9 +1,9 @@
 <template>
   <div>
-    <status :msg="childData"/>
+    <!-- <status/> -->
     <br />
     <!-- <addkelas/> -->
-    <daftarkelas @inputData="updateMessage"/>
+    <daftarkelas/>
   </div>
 </template>
 

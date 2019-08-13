@@ -7,9 +7,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 	state: {
   		status: "",
-  		token: '',
+  		token: localStorage.getItem('token') || '',
         user : {},
-        role : "",
+        role : localStorage.getItem('role') || "",
         // info : localStorage.getItem('role') || '',  
 	},
 	mutations: {

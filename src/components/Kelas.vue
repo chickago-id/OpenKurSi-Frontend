@@ -189,7 +189,7 @@ export default {
     },
     setKelas(){
         let isi = {
-          'id_materi' : this.data_kelas.    id_materi,
+          'id_materi' : this.data_kelas.id_materi,
           'kode_kelas' : this.data_kelas.kode_kelas,
           'jam_pilihan' : this.data_kelas.jam_pilihan,
           'tanggal_mulai' : this.data_kelas.tanggal_mulai,
