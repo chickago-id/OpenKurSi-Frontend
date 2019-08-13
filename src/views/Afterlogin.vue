@@ -1,7 +1,5 @@
 <template>
   <div>
-    <!-- <status/> -->
-    <br />
     <!-- <addkelas/> -->
     <daftarkelas/>
   </div>
