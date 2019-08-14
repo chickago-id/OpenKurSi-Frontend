@@ -1,17 +1,15 @@
 <template>
     <div>
-        <profile/>
+        <speserta/>
     </div>
 </template>
 
 <script>
-import profile from '@/components/Profile.vue';
-
+import speserta from '@/components/Statuspeserta.vue'
 
 export default {
     components:{
-        profile,
-     
+        speserta
     }
 }
 </script>
