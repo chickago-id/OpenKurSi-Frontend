@@ -139,10 +139,10 @@ export default {
         let isi = {
           'id_kelas' : this.kelas[index].id,
           'id_user' : this.user_id,
-          'nilai' : '',
+          'nilai' : 0,
           'nis' : this.user_id,
           'nomor_sertifikat' : '',
-          'status' : 'Aktif'
+          'status' : 'Pending'
         }
       axios.post(process.env.VUE_APP_ROOT_API + '/kelaspeserta', isi, { headers : ndas })
       .then(kls => {
