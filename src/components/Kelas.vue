@@ -139,8 +139,8 @@ export default {
         },
         statusop:[
             {value: null, text: 'Silakan Pilih', disabled: true},
-            {value: 'aktif', text: 'Aktif'},
-            {value: 'pending', text: 'Pending'},
+            {value: 'bayar', text: 'Bayar'},
+            {value: 'belum bayar', text: 'Belum Bayar'},
                 ],
         jkop:[
           { value: null, text: 'Silakan Pilih' ,  disabled: true},

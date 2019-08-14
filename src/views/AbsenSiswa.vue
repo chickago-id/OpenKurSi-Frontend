@@ -6,10 +6,11 @@
       		</div>
     		</b-modal>
 		<b-card  header="Absen siswa" class="text-center">
-        	Selamat Datang Siswa 
+        	Selamat Datang
         	<!-- <b-card-text v-for="k in kelas">
         	</b-card-text> -->
-        	<b-card>{{ nama.nama_lengkap }}</b-card>
+        	{{ nama.nama_lengkap }}
+        	<br><br>
         	 <b-button size="sm" variant="danger" type="submit" @click="showModal">Absen</b-button>
      	 </b-card>
 	</b-container>
