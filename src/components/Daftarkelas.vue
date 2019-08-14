@@ -93,7 +93,7 @@ export default {
               kelas_id : klas.kelas.id,
               Kelas : klas.kelas.materi.nama_materi,
               Jadwal : klas.kelas.tanggal_mulai,
-              Status : klas.kelas.status
+              Status : klas.status
             })
           }
         });
@@ -139,9 +139,9 @@ export default {
         let isi = {
           'id_kelas' : this.kelas[index].id,
           'id_user' : this.user_id,
-          'nilai' : '-',
+          'nilai' : '',
           'nis' : this.user_id,
-          'nomor_sertifikat' : '-',
+          'nomor_sertifikat' : '',
           'status' : 'Aktif'
         }
       axios.post(process.env.VUE_APP_ROOT_API + '/kelaspeserta', isi, { headers : ndas })
