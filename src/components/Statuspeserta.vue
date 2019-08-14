@@ -2,8 +2,11 @@
       <div>
           <b-container>
               <b-card>
-                  <b-table :items="kelaspst">
-                      
+                  <b-table :items="kelaspst" :fields="fields">
+                      <template slot="Action" slot-scope="kelaspst">
+                        <b-button size="sm" variant="warning">Edit</b-button>&nbsp;
+                        <b-button size="sm" variant="danger" >Hapus</b-button>
+                    </template>
                   </b-table>
               </b-card>
           </b-container>
@@ -50,9 +53,7 @@
           getKelaspst(){
               axios.get(process.env.VUE_APP_ROOT_API+'/kelaspeserta')
               .then((res)=> {
-            //   console.log(res)
-            //   this.kelaspst = res.data.data
-            //   console.log(kelasp)
+           
                 res.data.data.forEach(peserta => {
                     if(peserta.id_kelas == this.$route.params.id)
                     {
@@ -61,15 +62,7 @@
                 });
           })
         },
-        //  getKelas(){
-        //       axios.get(process.env.VUE_APP_ROOT_API+'/kelas')
-        //       .then((res)=> {
-        //       console.log(res)
-        //       this.kelas = res.data.data
-             
-        //   })
-        // },
-
+      
         
        },
        mounted(){

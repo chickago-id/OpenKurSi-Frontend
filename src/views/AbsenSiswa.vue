@@ -47,7 +47,7 @@
             'Authorization' : token,
             'Content-Type' : 'application/json'
         }
-		axios.get(process.env.VUE_APP_ROOT_API+'/profil',{ headers: ndas })
+		    axios.get(process.env.VUE_APP_ROOT_API+'/profil',{ headers: ndas })
          .then((res)=> {
             // console.log(res)
             let hmm = JSON.parse(res.data.data)
