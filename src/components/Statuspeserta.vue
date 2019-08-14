@@ -2,10 +2,6 @@
       <div>
           <b-container>
               <b-card>
-                  <!-- <b-table :items="kelas">
-                      
-                  </b-table> -->
-
                   <b-table :items="kelaspst">
                       
                   </b-table>
@@ -19,6 +15,33 @@
     export default{
        data(){
           return{
+              fields: {
+                  nis:{
+                      label : 'NIS',
+                      sortable : true
+                  },
+                  'user.username':{
+                      label : 'Nama',
+                      sortable : true
+                  },
+                  'kelas.materi.nama_materi':{
+                      label : 'Kelas',
+                      sortable : true
+                  },
+                  nomor_sertifikat:{
+                      label : 'No Sertifikat',
+                      sortable : true
+                  },
+                  nilai:{
+                      label : 'Nilai',
+                      sortable : true   
+                  },
+                  status:{
+                      label : 'Status',
+                      sortable : true
+                  },
+                  Action:{}
+              },
               kelas:[],
               kelaspst:[]
           }
