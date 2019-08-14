@@ -111,7 +111,7 @@ export default {
       return {
         fields: {
           'materi.nama_materi':{
-            label:'Nama Materi',
+            label:'Nama Kelas',
             sortable : true
           },
           tanggal_mulai:{

@@ -1,7 +1,7 @@
 <template>
       <div>
           <b-container>
-              <b-card>
+              <b-card :title="kelaspst[0].kelas.materi.nama_materi">
                   <b-table :items="kelaspst" :fields="fields">
                       <template slot="Action" slot-scope="kelaspst">
                         <b-button size="sm" variant="warning">Edit</b-button>&nbsp;
