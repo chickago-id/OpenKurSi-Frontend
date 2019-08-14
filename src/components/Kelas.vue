@@ -220,9 +220,9 @@ export default {
               axios.post(process.env.VUE_APP_ROOT_API+'/kelas', isi, { headers: ndas })
                 .then(({data}) => {
                 console.log(data, token);
-                data.data.forEach(item => {
-                this.kelas.push(item)
-                });
+                // data.data.forEach(item => {
+                // this.kelas.push(item)
+                // });
                 this.data_kelas.id='';
                 this.data_kelas.id_materi='';
                 this.data_kelas.kode_kelas='';
@@ -236,6 +236,7 @@ export default {
             });
                 this.$refs["my-modal"].hide();
           }
+          this.getKelas()
       },
       getKelas(){
         axios.get(process.env.VUE_APP_ROOT_API+'/kelas')
@@ -260,6 +261,7 @@ export default {
           this.$refs["my-modal"].show();
       },
       delKelas(index){
+        if(confirm("Do you really want to delete?")){
             const token = 'Bearer '+localStorage.getItem('token')
             const ndas = {
                 'Authorization' : token,
@@ -270,7 +272,8 @@ export default {
             .then(res =>{
             console.log(res)
             this.kelas.splice(index, 1);
-      })
+        })
+      }
       },    
       topeserta(index){
         const idnya_kelas = this.kelas[index].id

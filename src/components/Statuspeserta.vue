@@ -5,7 +5,7 @@
                   <b-table :items="kelaspst" :fields="fields">
                       <template slot="Action" slot-scope="kelaspst">
                         <b-button size="sm" variant="warning">Edit</b-button>&nbsp;
-                        <b-button size="sm" variant="danger" >Hapus</b-button>
+                        <b-button size="sm" variant="danger">Hapus</b-button>
                     </template>
                   </b-table>
               </b-card>
