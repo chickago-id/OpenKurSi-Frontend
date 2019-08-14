@@ -141,18 +141,20 @@ export default {
       this.$refs["my-modal"].show();
     },
     delmateri(index){
-      const token = 'Bearer '+localStorage.getItem('token')
-      const ndas = {
-        'Authorization' : token,
-        'Content-Type' : 'application/json'
+      if(confirm("Do you really want to delete?")){
+        const token = 'Bearer '+localStorage.getItem('token')
+        const ndas = {
+          'Authorization' : token,
+          'Content-Type' : 'application/json'
+        }
+        const id = this.materi[index].id
+        console.log(index, id)
+        axios.delete(process.env.VUE_APP_ROOT_API+'/materi/'+id, { headers: ndas })
+        .then(res =>{
+          console.log(res)
+          this.materi.splice(index, 1);
+        })
       }
-      const id = this.materi[index].id
-      console.log(index, id)
-      axios.delete(process.env.VUE_APP_ROOT_API+'/materi/'+id, { headers: ndas })
-      .then(res =>{
-        console.log(res)
-        this.materi.splice(index, 1);
-      })
     }
   }
 };
