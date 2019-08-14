@@ -93,6 +93,7 @@
                       </template>
 
                     <template slot="Action" slot-scope="kelas">
+                        <b-button size="sm" variant="info" @click="topeserta(kelas.index)">Peserta</b-button>&nbsp;
                         <b-button size="sm" variant="warning" @click="editKelas(kelas)">Edit</b-button>&nbsp;
                         <b-button size="sm" variant="danger" @click="delKelas(kelas.index)">Hapus</b-button>
                     </template>
@@ -271,7 +272,10 @@ export default {
             this.kelas.splice(index, 1);
       })
       },    
-
+      topeserta(index){
+        const idnya_kelas = this.kelas[index].id
+        this.$router.push('/statuspeserta/' + idnya_kelas)
+      }
     },
 
     mounted(){
