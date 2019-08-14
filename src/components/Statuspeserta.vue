@@ -27,9 +27,15 @@
           getKelaspst(){
               axios.get(process.env.VUE_APP_ROOT_API+'/kelaspeserta')
               .then((res)=> {
-              console.log(res)
-              this.kelaspst = res.data.data
-              console.log(kelasp)
+            //   console.log(res)
+            //   this.kelaspst = res.data.data
+            //   console.log(kelasp)
+                res.data.data.forEach(peserta => {
+                    if(peserta.id_kelas == this.$route.params.id)
+                    {
+                        this.kelaspst.push(peserta)
+                    }
+                });
           })
         },
         //  getKelas(){

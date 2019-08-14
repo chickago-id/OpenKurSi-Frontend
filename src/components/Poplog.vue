@@ -90,18 +90,18 @@ export default {
         // var baru = JSON.parse(response.data)
         // console.log(JSON.parse(response.data.data))
         let lengkapi = JSON.parse(response.data.data)
-        console.log(lengkapi)
-        if(lengkapi.alamat != null)
+        console.log(lengkapi.alamat)
+        if(lengkapi.alamat == '' || lengkapi.alamat == null)
         {
-          console.log('isi')
           // window.location = '/'
-          this.$router.push('/afterlogin')
+          console.log('kosong isi')
+          this.$router.push('/fill')
         }else
         {
-          console.log('kosong isi')
           // window.location = '/'
+          console.log('isi')
+          this.$router.push('/afterlogin')
           // window.location = this.$router.push('/fill')
-          this.$router.push('/fill')
         }
       })
     },
