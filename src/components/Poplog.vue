@@ -90,8 +90,12 @@ export default {
         // var baru = JSON.parse(response.data)
         // console.log(JSON.parse(response.data.data))
         let lengkapi = JSON.parse(response.data.data)
-        console.log(lengkapi.alamat)
-        if(lengkapi.alamat == '' || lengkapi.alamat == null)
+        console.log(lengkapi)
+        if(lengkapi.user.role == 'Admin')
+        {
+          this.$router.push('/admin/kelas')          
+        }
+        else if(lengkapi.alamat == '' || lengkapi.alamat == null)
         {
           // window.location = '/'
           console.log('kosong isi')

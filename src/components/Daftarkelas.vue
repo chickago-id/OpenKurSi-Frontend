@@ -4,6 +4,9 @@
             <b-card
                 title="Status">
                 <b-table striped hover :items="items2" :fields="fields2">
+                    <template slot="No" slot-scope="items2">
+                      {{ items2.index + 1 }}
+                    </template>
                     <template slot="Action" slot-scope="items2">
                         <b-button size="sm" variant="danger" @click="delklsp(items2.index)">Hapus</b-button>
                     </template>
