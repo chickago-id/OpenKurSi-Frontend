@@ -16,7 +16,6 @@
                             variant="primary"
                               title="Tambah Kelas"
                               header-bg-variant="primary"
-                              
                               ref="my-modal"
                               hide-footer
                               style="text-center"
