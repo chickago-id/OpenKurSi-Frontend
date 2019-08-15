@@ -23,7 +23,7 @@
                         >
                       <b-form @submit.prevent="setKelas">
                         <b-form-group label="Nama Materi">
-                          <b-form-select id="namamateri" :options="namamateriops" v-model="data_kelas.id_materi">
+                          <b-form-select id="namamateri" :options="namamateriops" v-model="data_kelas.id_materi" @change="materiinfo">
                              </b-form-select>
                         </b-form-group>
 
@@ -187,6 +187,16 @@ export default {
         console.log(response)
       })
 
+    },
+    materiinfo(){
+      const id = this.data_kelas.id_materi
+      axios.get(process.env.VUE_APP_ROOT_API + '/materi/' + id)
+      .then(response =>{
+        // console.log(response)
+        this.data_kelas.jam_pilihan = response.data.data[0].jam_pilihan
+        this.data_kelas.biaya = response.data.data[0].biaya
+        this.data_kelas.jumlah_pertemuan = response.data.data[0].jumlah_pertemuan
+      })
     },
     setKelas(){
         let isi = {
