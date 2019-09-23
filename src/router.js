@@ -125,6 +125,16 @@ let router = new Router({
       path: "/statuspeserta/:id",
       name: 'statuspeserta',
       component: () => import('./views/Vstatuspeserta.vue')
+    },
+    {
+      path: "/kategori-nilai",
+      name: 'kategoriNilai',
+      component: () => import('./views/KategoriNilai.vue')
+    },
+    {
+      path: "/nilai-siswa",
+      name: 'nilaiSiswa',
+      component: () => import('./views/NilaiSiswa.vue')
     }
   ]
 })
