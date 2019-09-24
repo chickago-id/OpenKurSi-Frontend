@@ -9,9 +9,13 @@
           <b-nav-item to="/admin/kelas">Kelas</b-nav-item>
           <!--<b-nav-item to="/admin/kelas">Kelas</b-nav-item>-->
            <b-nav-item to="/materi">Materi</b-nav-item>
+<<<<<<< HEAD
            <b-nav-item tag="router-link" to="/nilai">Nilai</b-nav-item>
            <b-nav-item tag="router-link" to="/kategori-nilai">Kategori Nilai</b-nav-item>
            <b-nav-item tag="router-link" to="/nilai-siswa">Nilai Siswa</b-nav-item>
+=======
+           <b-nav-item to="/nilaihuruf">Nilai Huruf</b-nav-item>
+>>>>>>> dfdc4b1c36bb8201bc56ebcba3e0c93bfe4eb9c0
 
         </b-navbar-nav>
         <b-navbar-nav v-else-if="isLoggedIn && userRole == 'Peserta'">

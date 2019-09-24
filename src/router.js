@@ -91,6 +91,12 @@ let router = new Router({
       path: "/nilai",
       name: "nilai",
       component: () => import("./views/Pennilai.vue")
+    }
+    ,
+    {
+      path:"/nilaihuruf",
+      name:"nilaihuruf",
+      component:() => import ("./views/Nilaihuruf.vue")
     },
     {
       path: "/absensi",
