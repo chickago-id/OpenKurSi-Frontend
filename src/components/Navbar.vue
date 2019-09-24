@@ -9,6 +9,7 @@
           <b-nav-item to="/admin/kelas">Kelas</b-nav-item>
           <!--<b-nav-item to="/admin/kelas">Kelas</b-nav-item>-->
            <b-nav-item to="/materi">Materi</b-nav-item>
+           <b-nav-item to="/nilaihuruf">Nilai Huruf</b-nav-item>
 
         </b-navbar-nav>
         <b-navbar-nav v-else-if="isLoggedIn && userRole == 'Peserta'">
