@@ -6,14 +6,30 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav v-if="isLoggedIn && userRole == 'Admin'">
           <!-- <b-nav-item to="/">Home</b-nav-item> -->
-          <b-nav-item to="/admin/kelas">Kelas</b-nav-item>
+          <!-- <b-nav-item to="/admin/kelas">Kelas</b-nav-item> -->
           <!--<b-nav-item to="/admin/kelas">Kelas</b-nav-item>-->
-           <b-nav-item to="/materi">Materi</b-nav-item>
-           <b-nav-item tag="router-link" to="/nilai">Nilai</b-nav-item>
-           <b-nav-item tag="router-link" to="/kategori-nilai">Kategori Nilai</b-nav-item>
-           <b-nav-item tag="router-link" to="/nilai-siswa">Nilai Siswa</b-nav-item>
-           <b-nav-item to="/nilaihuruf">Nilai Huruf</b-nav-item>
-
+           <!-- <b-nav-item to="/materi">Materi</b-nav-item> -->
+           <!-- <b-nav-item tag="router-link" to="/nilai">Nilai</b-nav-item> -->
+           <!-- <b-nav-item tag="router-link" to="/kategori-nilai">Kategori Nilai</b-nav-item> -->
+           <!-- <b-nav-item tag="router-link" to="/nilai-siswa">Nilai Siswa</b-nav-item> -->
+           <b-nav-item-dropdown text="Master Data" left>
+            <b-dropdown-item to="/nilaihuruf">Nilai Huruf</b-dropdown-item>
+            <b-dropdown-item to="/tahunakademik">Tahun Akademik</b-dropdown-item>
+            <b-dropdown-item to="/masterbatch">List Batch</b-dropdown-item>
+            <b-dropdown-item to="/masterkelas">List Kelas</b-dropdown-item>
+          </b-nav-item-dropdown>
+          <b-nav-item-dropdown text="Akademik" left>
+            <b-dropdown-item to="/materi">Materi</b-dropdown-item>
+            <b-dropdown-item tag="router-link" to="/nilai">Nilai</b-dropdown-item>
+            <b-dropdown-item tag="router-link" to="/nilai-siswa">Nilai Siswa</b-dropdown-item>
+            <b-dropdown-item to="/admin/kelas">Daftar Kelas</b-dropdown-item>
+            <b-dropdown-item to="/jadwal">Jadwal</b-dropdown-item>
+          </b-nav-item-dropdown>
+          <b-nav-item-dropdown text="Help" left>
+            <b-dropdown-item to="/about">About</b-dropdown-item>
+            <b-dropdown-item tag="router-link" to="/documentation">Documentation</b-dropdown-item>
+            <b-dropdown-item tag="router-link" to="/releasenote">Release Note</b-dropdown-item>
+          </b-nav-item-dropdown>
         </b-navbar-nav>
         <b-navbar-nav v-else-if="isLoggedIn && userRole == 'Peserta'">
           <!-- <b-nav-item to="/">Home</b-nav-item> -->
@@ -36,6 +52,7 @@
                 <template slot="button-content"><em>Siswa</em></template>
                 <b-dropdown-item to="/profile">Profile</b-dropdown-item>
                 <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
+               Hi  {{name}}
             </b-nav-item-dropdown>
             <b-nav-item-dropdown right v-else-if="isLoggedIn && userRole == 'Admin'" >
                 <template slot="button-content"><em>Admin</em></template>
