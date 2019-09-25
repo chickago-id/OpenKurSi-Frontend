@@ -24,15 +24,17 @@
             
               <!--<b-form-input v-model="data_nilai_siswa.id" type="hidden"></b-form-input> -->
               <label>Siswa</label>
-              <b-form-input v-model="data_nilai_siswa.user.id_user" type="number"></b-form-input>
-              <label>Kategori</label>
+              <b-form-input v-model="data_nilai_siswa.id_user" type="number"></b-form-input>
+              <label>Kategori Nilai</label>
+              <b-form-input v-model="data_nilai_siswa.id_kategori_nilai" type="number"></b-form-input>
+              <!-- <label>Kategori</label> -->
               <!-- <b-form-input v-model="data_nilai_siswa.kategoriNilai.id_kategori_nilai" type="number"></b-form-input> -->
-              <b-form-select :options="provinsiops" v-model="selectprov" required></b-form-select>
+              <!-- <b-form-select :options="kategoriOps" v-model="selectKategori" required></b-form-select> -->
               <!-- <label >Materi</label>
               <b-form-input v-model="data_nilai_siswa.kategoriNilai.materi.nama_materi" ></b-form-input>
                -->
-              <label>Bobot Nilai</label>
-              <b-form-input disabled v-model="selectprov"></b-form-input>
+              <!--<label>Bobot Nilai</label>
+              <b-form-input disabled v-model="selectKategori"></b-form-input>-->
               <label>Nilai Input</label>
               <b-form-input v-model="data_nilai_siswa.nilai_input" type="number"></b-form-input>
               <label>Nilai Hitung</label>
@@ -68,7 +70,7 @@
               {{dataNilaiSiswa.item.nilai_input}}
           </template>
           <template slot="nilaiHitung" slot-scope="dataNilaiSiswa">
-              {{dataNilaiSiswa.item.kategoriNilai.bobot_nilai}}
+              {{dataNilaiSiswa.item.nilai_hitung}}
           </template>
           <template slot="Action" slot-scope="dataNilaiSiswa">
               <b-button size="sm" variant="warning" @click="editNilaiSiswa(dataNilaiSiswa)">Edit</b-button>&nbsp;
@@ -90,8 +92,8 @@ export default {
     },
     data(){
       return{
-        provinsiops:[{'text': 'Silakan Pilih', 'value':'', 'bobot':''}],
-        selectprov: '',
+        kategoriOps:[{'text': 'Silakan Pilih', 'value':'', 'bobot':''}],
+        selectKategori: '',
         user_id:'',
         dataNilaiSiswa:[],
         fields: {
@@ -125,8 +127,8 @@ export default {
         },
         data_nilai_siswa:{
           id_nilai_siswa : '',
-          user:{},
-          kategoriNilai: {},
+          id_user : '',
+          id_kategori_nilai : '',
           nilai_input: '',
           nilai_hitung: '',
           created_by :'',
@@ -153,7 +155,7 @@ export default {
           .then(response =>{
             let lengkapi = JSON.parse(response.data.data)
             this.user_id = lengkapi.user.id
-            console.log(lengkapi, this.roles)
+            //console.log(lengkapi, this.roles)
           })
         }else{
           this.roles = ''
@@ -161,8 +163,8 @@ export default {
       },
       clear() {
         this.data_nilai_siswa.id_nilai_siswa = ''
-        this.data_nilai_siswa.user = {}
-        this.data_nilai_siswa.kategoriNilai = {}
+        this.data_nilai_siswa.id_user = ''
+        this.data_nilai_siswa.id_kategori_nilai = ''
         this.data_nilai_siswa.nilai_input = ''
         this.data_nilai_siswa.nilai_hitung = ''
         this.data_nilai_siswa.created_by = ''
@@ -204,8 +206,8 @@ export default {
             //this.getData()
           })
       } else { 
-        //this.data_nilai_siswa.created_by = this.user_id
-        //this.data_nilai_siswa.updated_by = this.user_id
+        this.data_nilai_siswa.created_by = this.user_id
+        this.data_nilai_siswa.updated_by = this.user_id
         axios.post(process.env.VUE_APP_ROOT_API+'/nilai-siswa', 
           this.data_nilai_siswa, { headers: ndas })
           .then((data) => {
@@ -219,15 +221,15 @@ export default {
         this.getData()
         this.$refs["my-modal"].hide();
         alert("data berhasil disimpan")
+        location.reload()
     },
     editNilaiSiswa(dataNilaiSiswa){
       this.data_nilai_siswa.id_nilai_siswa = dataNilaiSiswa.item.id_nilai_siswa
-      this.data_nilai_siswa.user.id_user = dataNilaiSiswa.item.user.id_user
-      this.data_nilai_siswa.kategoriNilai.id_kategori_nilai = dataNilaiSiswa.item.kategoriNilai.id_kategori_nilai
-     // this.data_nilai_siswa.kategoriNilai.materi.nama_materi = dataNilaiSiswa.item.kategoriNilai.materi.nama_materi
-      this.data_nilai_siswa.kategoriNilai.bobot_nilai = dataNilaiSiswa.item.kategoriNilai.bobot_nilai
+      this.data_nilai_siswa.id_user = dataNilaiSiswa.item.user.id_user
+      this.data_nilai_siswa.id_kategori_nilai = dataNilaiSiswa.item.kategoriNilai.id_kategori_nilai
       this.data_nilai_siswa.nilai_input = dataNilaiSiswa.item.nilai_input
       this.data_nilai_siswa.nilai_hitung = dataNilaiSiswa.item.nilai_hitung
+      this.data_nilai_siswa.updated_by = this.user_id
       this.data_nilai_siswa.updated_by = this.user_id
       this.$refs["my-modal"].show();
     },
@@ -242,7 +244,7 @@ export default {
         axios.delete(process.env.VUE_APP_ROOT_API+'/nilai-siswa/'+index, { headers: ndas })
         .then((res) =>{
         console.log(res)
-        this.dataKategoriNilai.splice(index, 1)
+        this.dataNilaiSiswa.splice(index, 1)
         }, (error) => {
           console.log(error)
         }) 
@@ -252,7 +254,7 @@ export default {
         axios.get(process.env.VUE_APP_ROOT_API+'/kategori-nilai')
         .then((response) => {
             response.data.data.forEach(item => {
-                this.provinsiops.push({
+                this.kategoriOps.push({
                     text: item.nama_kategori,
                     value: item.id_kategori_nilai,
                     bobot: item.bobot_nilai
