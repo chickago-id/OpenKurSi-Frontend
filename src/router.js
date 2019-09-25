@@ -141,6 +141,21 @@ let router = new Router({
       path: "/nilai-siswa",
       name: 'nilaiSiswa',
       component: () => import('./views/NilaiSiswa.vue')
+    },
+    {
+      path: "/batch",
+      name: "batch",
+      component: () => import("./views/Batch.vue")
+    },
+    {
+      path: "/tahunakademik",
+      name: "tahunakademik",
+      component: () => import("./views/TahunAkademik.vue")
+    },
+    {
+      path: "/masterkelas",
+      name: "masterkelas",
+      component: () => import("./views/Penkelas.vue")
     }
   ]
 })

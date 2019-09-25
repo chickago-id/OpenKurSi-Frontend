@@ -15,7 +15,7 @@
            <b-nav-item-dropdown text="Master Data" left>
             <b-dropdown-item to="/nilaihuruf">Nilai Huruf</b-dropdown-item>
             <b-dropdown-item to="/tahunakademik">Tahun Akademik</b-dropdown-item>
-            <b-dropdown-item to="/masterbatch">List Batch</b-dropdown-item>
+            <b-dropdown-item to="/batch">List Batch</b-dropdown-item>
             <b-dropdown-item to="/masterkelas">List Kelas</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="Akademik" left>
