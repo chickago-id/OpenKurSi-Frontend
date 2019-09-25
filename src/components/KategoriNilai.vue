@@ -30,13 +30,13 @@
               <!-- <b-form-input v-model="data_kategori_nilai.materi.id" ></b-form-input> -->
               <label>Bobot Nilai</label>
               <b-form-input min="0" max="100" v-model="data_kategori_nilai.bobot_nilai" type="number" ></b-form-input>
-              <label>Created By</label>
+              <!-- <label>Created By</label>
               <b-form-input disabled v-model="data_kategori_nilai.created_by" type="number" ></b-form-input>
               <label>Created date</label>
               <b-form-input disabled v-model="data_kategori_nilai.created_date" ></b-form-input>
               <label>Updated date</label>
               <b-form-input disabled v-model="data_kategori_nilai.updated_date"  ></b-form-input>
-              <div style="text-align:center;">
+               --><div style="text-align:center;">
                 <b-button variant="primary" class="mt-3 btn-sm asd" type="submit" block>Simpan Materi</b-button>
               </div>
             </form> 
@@ -85,7 +85,7 @@
 
       </div> -->
             
-      <p>Total Bobot Nilai {{total}} (In progress)</p>
+      <p>Total Bobot Nilai {{total}} (In progress) {{user_id}}</p>
       
       
       </b-card>
@@ -184,7 +184,7 @@ export default {
           .then(response =>{
             let lengkapi = JSON.parse(response.data.data)
             this.user_id = lengkapi.user.id
-            console.log(lengkapi, this.roles)
+            //console.log(lengkapi, this.roles)
           })
         }else{
           this.roles = ''
@@ -196,9 +196,9 @@ export default {
         this.data_kategori_nilai.materi.id = '' 
         this.data_kategori_nilai.bobot_nilai =''
         this.data_kategori_nilai.created_by =''
-        this.data_kategori_nilai.created_date= new Date().toLocaleDateString()
+        this.data_kategori_nilai.created_date= ''//new Date().toLocaleDateString()
         this.data_kategori_nilai.updated_by= ''
-        this.data_kategori_nilai.updated_date= new Date().toLocaleDateString()
+        this.data_kategori_nilai.updated_date= ''//new Date().toLocaleDateString()
         this.showModal()
       },
       getData(){
@@ -257,9 +257,9 @@ export default {
       this.data_kategori_nilai.nama_kategori = dataKategoriNilai.item.nama_kategori
       this.data_kategori_nilai.materi.id = dataKategoriNilai.item.materi.id
       this.data_kategori_nilai.bobot_nilai = dataKategoriNilai.item.bobot_nilai
-      this.data_kategori_nilai.created_by = dataKategoriNilai.item.created_by
-      this.data_kategori_nilai.created_date = dataKategoriNilai.item.created_date
-      this.data_kategori_nilai.updated_date = dataKategoriNilai.item.updated_date
+      //this.data_kategori_nilai.created_by = dataKategoriNilai.item.created_by
+      //this.data_kategori_nilai.created_date = dataKategoriNilai.item.created_date
+      //this.data_kategori_nilai.updated_date = dataKategoriNilai.item.updated_date
       this.$refs["my-modal"].show();
     },
     delKategori(index){
