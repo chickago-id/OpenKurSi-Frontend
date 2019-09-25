@@ -20,6 +20,7 @@
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="Akademik" left>
             <b-dropdown-item to="/materi">Materi</b-dropdown-item>
+            <b-dropdown-item tag="router-link" to="/kategori-nilai">Kategori Nilai</b-dropdown-item>
             <b-dropdown-item tag="router-link" to="/nilai">Nilai</b-dropdown-item>
             <b-dropdown-item tag="router-link" to="/nilai-siswa">Nilai Siswa</b-dropdown-item>
             <b-dropdown-item to="/admin/kelas">Daftar Kelas</b-dropdown-item>
